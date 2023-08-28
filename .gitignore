@@ -1,0 +1,18 @@
+
+# quarto files
+src/_site
+src/.quarto
+
+# tauri files
+src-tauri/target
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

@@ -1,0 +1,42 @@
+---
+title: "Fastx Utilities"
+---
+
+FastX Utilities
+
+
+```{ojs}
+invoke = window.__TAURI__.tauri.invoke;
+open   = window.__TAURI__.dialog.open;
+ask    = window.__TAURI__.dialog.ask;
+
+// use the tauri open to get absolute file paths
+async function choosefasta(){
+    const selected = open({
+        multiple: false,
+        filters: [{
+            name: 'Fasta',
+            extensions: ['fa', 'fasta', 'fna']}]
+    });
+    return selected
+};
+
+
+viewof fasta_stats = Inputs.button(
+    "Calculate State 2", 
+    { 
+        value: null, 
+        reduce: () => choosefasta().then((fname) => invoke("get_seqstats", {filename: fname}).then()) 
+    });
+
+fasta_stats
+
+```
+
+
+```{ojs}
+
+htl.html`<p>I am a <i>paragraph</i> ${fasta_stats} </p>`
+
+```
+

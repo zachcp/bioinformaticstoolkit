@@ -1,0 +1,78 @@
+---
+title: "Quarto in Tauri"
+self-contained: false
+---
+
+
+This is a [Quarto website](https://quarto.org/) that van be built as a [Tauri application](https://tauri.app/) and therefore interop with fast RUST code on your local client machine.
+
+
+<br></br>
+
+
+## Example Application
+
+This simple example below shows almost everything you need to know to start getting up and running.
+
+1. We import the `greet` function from a local file, `api.js`
+2. In that file we also declare the `invoke` funciton which will let us pass JS into fast rust funtions.
+3. We use reactive [OJS form](https://quarto.org/docs/interactive/ojs/) to collect a name and send that to the Rust function.
+4. The data is returned and displayed.
+
+
+```{ojs}
+import {greet} from "./api.js"
+
+viewof name = Inputs.text(
+    {label: "Name", 
+    placeholder: "Enter your name", 
+    value: "Ziggy",
+    submit: true})
+
+greet(name)
+```
+
+### The Code
+
+```js
+// this is required to interact with tauri
+const { invoke } = window.__TAURI__.tauri;
+
+// the greet function is called greet. it will `invoke` a Rust
+// function called greet with a set of parameters
+export function greet(name_str) {
+  return invoke("greet", { name: name_str });
+}
+```
+
+
+```rust
+# The rust function looks like this.
+# the tauri macro exposes the function
+
+#[tauri::command]
+fn greet(name: &str) -> String {
+    format!("Hello, {}! You've been greeted from Rust!", name)
+}
+```
+
+
+
+## Setup 
+
+The following setup assumes you have Quarto and Rust/Cargo installed.
+
+```sh
+# assuming
+# install the tauri cli
+cargo install tauri-cli
+
+# add cargo bind dir to the path
+export PATH=$PATH:~/.cargo/bin/
+
+# to develop 
+cargo-tauri dev
+
+# to package
+cargo-tauri 
+```
