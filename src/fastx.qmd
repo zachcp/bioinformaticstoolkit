@@ -5,7 +5,11 @@ title: "Fastx Utilities"
 FastX Utilities
 
 
+
+
 ```{ojs}
+//|  code-fold: true
+
 invoke = window.__TAURI__.tauri.invoke;
 open   = window.__TAURI__.dialog.open;
 ask    = window.__TAURI__.dialog.ask;
@@ -23,11 +27,12 @@ async function choosefasta(){
 
 
 viewof fasta_stats = Inputs.button(
-    "Calculate State 2", 
+    "Get Fasta Stats", 
     { 
         value: null, 
         reduce: () => choosefasta().then((fname) => invoke("get_seqstats", {filename: fname}).then()) 
     });
+
 
 fasta_stats
 
