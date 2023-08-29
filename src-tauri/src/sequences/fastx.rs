@@ -49,8 +49,10 @@ pub fn convert_fastq_to_fasta(input_path: &str, output_path: &str)  ->  io::Resu
 }
 
 
+
+
 // Note: theres gott abe abetter way to handle this tauri issue....
-#[tauri::command]
+#[tauri::command(rename_all = "snake_case")]
 pub fn convert_fastq_to_fasta_tauri(input_path: &str, output_path: &str)  -> Result<String, String> {
     let results = convert_fastq_to_fasta( input_path, output_path);
 

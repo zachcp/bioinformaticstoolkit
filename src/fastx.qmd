@@ -5,6 +5,7 @@ title: "Fastx Utilities"
 FastX Utilities
 
 
+# Basic stats
 
 
 ```{ojs}
@@ -25,6 +26,15 @@ async function choosefasta(){
     return selected
 };
 
+async function choosefastq(){
+    const selected = open({
+        multiple: false,
+        filters: [{
+            name: 'Fastq',
+            extensions: ['fq', 'fastq']}]
+    });
+    return selected
+};
 
 viewof fasta_stats = Inputs.button(
     "Get Fasta Stats", 
@@ -39,9 +49,34 @@ fasta_stats
 ```
 
 
-```{ojs}
 
-htl.html`<p>I am a <i>paragraph</i> ${fasta_stats} </p>`
+
+# Convert Fastq to Fasta
+
+
+```{ojs}
+//|  code-fold: true
+
+
+async function launch_conversion(fqname) {
+    let fasta_name = fqname.split(".").slice(0, -1).join("/") + "_converted.fasta";
+    console.log(fqname);
+    console.log(fasta_name);
+    invoke("convert_fastq_to_fasta_tauri", {input_path: fqname, output_path: fasta_name})
+}
+
+
+
+viewof convert_stats = Inputs.button(
+    "Convert FastQ to Fasta", 
+    { 
+        value: null, 
+        reduce: () => choosefastq().then((fqname) => launch_conversion(fqname).then())
+    })
+
+
+convert_stats
 
 ```
+
 
