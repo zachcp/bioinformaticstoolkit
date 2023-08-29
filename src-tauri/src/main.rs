@@ -11,6 +11,10 @@ use noodles_fasta as fasta;
 use serde::{Deserialize, Serialize};
 use bio::pattern_matching::bndm;
 
+mod sequences;
+use sequences::fastx as fastx;
+
+
 
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 #[tauri::command]
@@ -213,6 +217,7 @@ fn check_restriction_sites(sequence: &str) -> Vec<REMatches> {
 
 fn main() {
 
+
     tauri::Builder::default()
         .invoke_handler(
             tauri::generate_handler![
@@ -231,23 +236,12 @@ mod tests {
 
     #[test]
     fn test_small_stats() {
-        let result = get_stats("testdata/fasta/small.fasta".to_string());
+        let result = get_stats("testdata/fastx/small.fasta".to_string());
         let FastaData {maxlength, recordcount} = result;
-
         assert_eq!(maxlength, 34);
         assert_eq!(recordcount, 2);
     }
 
 
-    // #[test]
-    // fn test_add() {
-    //     assert_eq!(add(1, 2), 3);
-    // }
 
-    // #[test]
-    // fn test_bad_add() {
-    //     // This assert would fire and test will fail.
-    //     // Please note, that private functions can be tested too!
-    //     assert_eq!(bad_add(1, 2), 3);
-    //}
 }

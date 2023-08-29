@@ -19,12 +19,16 @@ cargo-tauri dev
 
 # to package. this build is ~8MB. 
 cargo-tauri build
+
+# to test
+cd src-tauri && cargo test
+# or verbose
+cd src-tauri && cargo test -- --nocapture
+
 ```
 
 
 ## Ideas
-
-
 
 
 FASTX:
