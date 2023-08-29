@@ -10,7 +10,6 @@ use std::str;
 use noodles_fasta as fasta;
 use serde::{Deserialize, Serialize};
 use bio::pattern_matching::bndm;
-use std::collections::HashMap;
 
 
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
@@ -18,7 +17,6 @@ use std::collections::HashMap;
 fn greet(name: &str) -> String {
     format!("Hello, {}! You've been greeted from Rust!", name)
 }
-
 
 
 
@@ -142,15 +140,13 @@ fn get_seqstats(filename: String) -> SeqKitFastaData {
 
 
 
-
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct REMatches {
     name: String,
     locations: Vec<usize>
-    // locations: Vec<[i32; 2]>
 }
 
-fn quick_test() {
+fn quick_test() -> Vec<REMatches>{
     // let eco_ri = "GAATTC";
     // let bamhi = "GGATCC";
     // let pattern = b"GAAAA";
@@ -179,8 +175,7 @@ fn quick_test() {
             }
         );     
     }
-    println!("{:?}", results);        
-
+    results
 }
 
 
@@ -218,8 +213,6 @@ fn check_restriction_sites(sequence: &str) -> Vec<REMatches> {
 
 fn main() {
 
-    quick_test();
-
     tauri::Builder::default()
         .invoke_handler(
             tauri::generate_handler![
@@ -228,3 +221,33 @@ fn main() {
         .expect("error while running tauri application");
 }
 
+
+
+
+#[cfg(test)]
+mod tests {
+    // Note this useful idiom: importing names from outer (for mod tests) scope.
+    use super::*;
+
+    #[test]
+    fn test_small_stats() {
+        let result = get_stats("testdata/fasta/small.fasta".to_string());
+        let FastaData {maxlength, recordcount} = result;
+
+        assert_eq!(maxlength, 34);
+        assert_eq!(recordcount, 2);
+    }
+
+
+    // #[test]
+    // fn test_add() {
+    //     assert_eq!(add(1, 2), 3);
+    // }
+
+    // #[test]
+    // fn test_bad_add() {
+    //     // This assert would fire and test will fail.
+    //     // Please note, that private functions can be tested too!
+    //     assert_eq!(bad_add(1, 2), 3);
+    //}
+}
