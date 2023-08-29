@@ -221,7 +221,8 @@ fn main() {
     tauri::Builder::default()
         .invoke_handler(
             tauri::generate_handler![
-                greet, get_stats, get_seqstats, check_restriction_sites])
+                greet, get_stats, get_seqstats, check_restriction_sites, 
+                fastx::convert_fastq_to_fasta_tauri])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

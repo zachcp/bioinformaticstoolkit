@@ -17,7 +17,7 @@ use noodles_fastq as fastq;
 
 
 
-pub fn fastq_to_fasta(input_path: &str, output_path: &str)  -> io::Result<()>  {
+pub fn convert_fastq_to_fasta(input_path: &str, output_path: &str)  ->  io::Result<()> {
 
     let mut reader = File::open(input_path)
         .map(BufReader::new)
@@ -49,6 +49,19 @@ pub fn fastq_to_fasta(input_path: &str, output_path: &str)  -> io::Result<()>  {
 }
 
 
+// Note: theres gott abe abetter way to handle this tauri issue....
+#[tauri::command]
+pub fn convert_fastq_to_fasta_tauri(input_path: &str, output_path: &str)  -> Result<String, String> {
+    let results = convert_fastq_to_fasta( input_path, output_path);
+
+    if results.is_ok() {
+        Ok("This worked!".into()) 
+    } else {
+        Err("This failed!".into())
+    }
+}
+
+
 
 
 #[cfg(test)]
@@ -60,7 +73,7 @@ mod tests {
         
         let temp_file = NamedTempFile::new().expect("Failed to create temp file");
         let output_path = temp_file.path().to_str().unwrap();
-        let result = fastq_to_fasta(
+        let result = convert_fastq_to_fasta(
             "testdata/fastx/small.fastq",
             output_path,
         );
