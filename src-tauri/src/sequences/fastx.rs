@@ -1,7 +1,3 @@
-use tempfile::NamedTempFile;
-use filesize::PathExt;
-
-
 // use std::io::prelude::*;
 use std::io::{
     self,
@@ -79,6 +75,9 @@ pub fn convert_fastq_to_fasta_tauri(input_path: &str, output_path: &str)  -> Res
 #[cfg(test)]
 mod tests {
     use super::*;
+    use tempfile::NamedTempFile;
+    use filesize::PathExt;
+
 
     #[test]
     fn test_convert_fastq_fasta() {
