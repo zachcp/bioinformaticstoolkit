@@ -80,3 +80,18 @@ convert_stats_realized
 ```
 
 
+
+# Restriction Enzyme Analysis
+
+Here we search for Restriction enzymes in DNA sequences. The current setup  will return the locations of the match on teh forward sequence.
+
+
+```{ojs}
+//|  code-fold: true
+
+viewof text = Inputs.textarea({label: "DNA For Searching", placeholder: "DNA Goes here", submit: true})
+
+re_sites =  (text == "") ? []: invoke("check_restriction_sites", {sequence: text})
+re_sites
+
+```
