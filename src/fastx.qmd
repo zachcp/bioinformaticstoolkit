@@ -9,11 +9,9 @@ FastX Utilities
 
 
 ```{ojs}
-//|  code-fold: true
-
+// support functions
 invoke = window.__TAURI__.tauri.invoke;
 open   = window.__TAURI__.dialog.open;
-ask    = window.__TAURI__.dialog.ask;
 
 // use the tauri open to get absolute file paths
 async function choosefasta(){
@@ -36,6 +34,11 @@ async function choosefastq(){
     return selected
 };
 
+```
+
+```{ojs}
+//|  code-fold: true
+
 viewof fasta_stats = Inputs.button(
     "Get Fasta Stats", 
     { 
@@ -44,9 +47,7 @@ viewof fasta_stats = Inputs.button(
     });
 
 
-
 fasta_stats_realized = (fasta_stats == null) ? "Click Above to Get Fasta Statistics" : fasta_stats
-
 fasta_stats_realized
 
 ```
@@ -60,7 +61,6 @@ fasta_stats_realized
 ```{ojs}
 //|  code-fold: true
 
-
 viewof convert_stats = Inputs.button(
     "Convert FastQ to Fasta", 
     { 
@@ -69,15 +69,11 @@ viewof convert_stats = Inputs.button(
             .then( function (fqname) {
                 let fasta_name = fqname.split(".").slice(0,-1).join(".");
                 fasta_name = fasta_name + "_converted.fasta"
-                return invoke("convert_fastq_to_fasta_tauri", {input_path: fqname, output_path: fasta_name})
-                }
-            )
-    }
-);
+                return invoke("convert_fastq_to_fasta_tauri", {input_path: fqname, output_path: fasta_name})})});
 
-stats = (convert_stats == null) ? "Click Above to Convert" : convert_stats
 
-stats
+convert_stats_realized = (convert_stats == null) ? "Click Above to Convert" : convert_stats
+convert_stats_realized
 
 ```
 
