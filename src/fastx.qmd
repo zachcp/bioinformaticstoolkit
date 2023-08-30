@@ -40,7 +40,7 @@ viewof fasta_stats = Inputs.button(
     "Get Fasta Stats", 
     { 
         value: null, 
-        reduce: () => choosefasta().then((fname) => invoke("get_seqstats", {filename: fname}).then()) 
+        reduce: () => choosefasta().then((fname) => invoke("get_seqstats", {filename: fname})) 
     });
 
 
@@ -58,22 +58,27 @@ fasta_stats
 //|  code-fold: true
 
 
-async function launch_conversion(fqname) {
-    let fasta_name = fqname.split(".").slice(0, -1).join("/") + "_converted.fasta";
-    console.log(fqname);
-    console.log(fasta_name);
-    invoke("convert_fastq_to_fasta_tauri", {input_path: fqname, output_path: fasta_name})
-}
-
-
-
 viewof convert_stats = Inputs.button(
     "Convert FastQ to Fasta", 
     { 
         value: null, 
-        reduce: () => choosefastq().then((fqname) => launch_conversion(fqname).then())
-    })
-
+        reduce: () => choosefastq()
+            .then( function (fqname) {
+                let fasta_name = fqname.split(".").slice(0,-1).join(".");
+                fasta_name = fasta_name + "_converted.fasta"
+                return [fqname, fasta_name]})
+            .then(function (files) {
+                let [fqname, faname] = files;
+                console.log(fqname);
+                console.log(faname);
+                return invoke("convert_fastq_to_fasta_tauri", {input_path: fqname, output_path: faname})
+            })
+            // .then(function (results) {
+            //     console.log(results);
+            //     return results
+            // }
+            // )
+        });
 
 convert_stats
 

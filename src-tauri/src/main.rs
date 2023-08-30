@@ -13,7 +13,7 @@ use bio::pattern_matching::bndm;
 
 mod sequences;
 use sequences::fastx as fastx;
-
+use sequences::fastx::convert_fastq_to_fasta_tauri;
 
 
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
@@ -222,7 +222,7 @@ fn main() {
         .invoke_handler(
             tauri::generate_handler![
                 greet, get_stats, get_seqstats, check_restriction_sites, 
-                fastx::convert_fastq_to_fasta_tauri])
+                convert_fastq_to_fasta_tauri])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

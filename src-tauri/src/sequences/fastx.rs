@@ -1,4 +1,6 @@
 use tempfile::NamedTempFile;
+use filesize::PathExt;
+
 
 // use std::io::prelude::*;
 use std::io::{
@@ -7,8 +9,11 @@ use std::io::{
     BufWriter,
 };
 
-use std::str;
+
 use std::fs::File;
+use std::path::Path;
+use std::str;
+
 
 use fasta::record::Definition as FastaDefinition;
 use noodles_fasta as fasta;
@@ -19,11 +24,13 @@ use noodles_fastq as fastq;
 
 pub fn convert_fastq_to_fasta(input_path: &str, output_path: &str)  ->  io::Result<()> {
 
+    
     let mut reader = File::open(input_path)
         .map(BufReader::new)
         .map(fastq::Reader::new)?;
 
-    let mut fasta_writer = File::open(output_path)
+    // note we are creating the file here instead of opening it
+    let mut fasta_writer = File::create(output_path)
         .map(BufWriter::new)
         .map(fasta::Writer::new)?;
 
@@ -41,9 +48,10 @@ pub fn convert_fastq_to_fasta(input_path: &str, output_path: &str)  ->  io::Resu
             fasta_definition,
             fasta::record::Sequence::from(record.sequence().to_vec()),
         );
+        
         fasta_writer.write_record(&fasta_record)?;
     }
-    
+
     Ok(())
 
 }
@@ -54,12 +62,14 @@ pub fn convert_fastq_to_fasta(input_path: &str, output_path: &str)  ->  io::Resu
 // Note: theres gott abe abetter way to handle this tauri issue....
 #[tauri::command(rename_all = "snake_case")]
 pub fn convert_fastq_to_fasta_tauri(input_path: &str, output_path: &str)  -> Result<String, String> {
+    println!("filpaths: {}  and {} ", input_path, output_path);
+    println!("We're in the conversion funtion!");
     let results = convert_fastq_to_fasta( input_path, output_path);
-
+    println!("We've exited the conversion function!");
     if results.is_ok() {
-        Ok("This worked!".into()) 
+        Ok("This worked!".to_string()) 
     } else {
-        Err("This failed!".into())
+        Err("This failed!".to_string())
     }
 }
 
@@ -79,8 +89,27 @@ mod tests {
             "testdata/fastx/small.fastq",
             output_path,
         );
+        
+        assert!(result.is_ok());
+        assert!(temp_file.path().exists());
+        assert!(temp_file.path().size_on_disk().unwrap() != 0);
+
+    }
+
+
+    #[test]
+    fn test_convert_fastq_fasta_tauri() {
+        
+        let temp_file = NamedTempFile::new().expect("Failed to create temp file");
+        let output_path = temp_file.path().to_str().unwrap();
+        let result = convert_fastq_to_fasta_tauri(
+            "testdata/fastx/small.fastq",
+            output_path,
+        );
 
         assert!(result.is_ok());
+        assert!(temp_file.path().exists());
+        assert!(temp_file.path().size_on_disk().unwrap() != 0);
 
     }
 
