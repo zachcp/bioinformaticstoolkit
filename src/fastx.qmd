@@ -9,6 +9,8 @@ FastX Utilities
 
 
 ```{ojs}
+//| echo: false
+//| 
 // support functions
 invoke = window.__TAURI__.tauri.invoke;
 open   = window.__TAURI__.dialog.open;

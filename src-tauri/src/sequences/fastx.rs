@@ -9,11 +9,144 @@ use std::fs::File;
 use std::path::Path;
 use std::str;
 
+use serde::{Deserialize, Serialize};
+
 use fasta::record::Definition as FastaDefinition;
 use noodles_fasta as fasta;
 use noodles_fastq as fastq;
 
 
+
+
+//  Get Stats -------------------------------------------------------------------------------------------------------------------
+
+#[derive(Serialize, Deserialize)]
+pub struct FastaData {
+    recordcount: i32,
+    maxlength: i32,
+}
+
+
+
+#[tauri::command(rename_all = "snake_case")]
+pub fn get_stats(filename: String) -> FastaData {
+
+    let mut count = 0;
+    let mut maxlength = 0;
+
+    let mut reader = File::open(&filename)
+      .map(BufReader::new)
+        .map(fasta::Reader::new).unwrap();
+
+    for result in reader.records() {
+        count = count + 1;
+        let record = result.unwrap();
+        println!("{}\t{}", record.name(), record.sequence().len());
+        let reclength =  record.sequence().len();
+
+        if reclength > maxlength {
+            maxlength = reclength
+        }
+    };
+
+    let stats = FastaData {
+        recordcount: count,
+        maxlength: maxlength as i32,
+    };
+
+    stats
+}
+
+
+
+
+//  Get Advanced Stats  -------------------------------------------------------------------------------------------------------------------
+
+
+// simple statistics of FASTA/Q files
+// Columns:
+//   1.  file      input file, "-" for STDIN
+//   2.  format    FASTA or FASTQ
+//   3.  type      DNA, RNA, Protein or Unlimit
+//   4.  num_seqs  number of sequences
+//   5.  sum_len   number of bases or residues       , with gaps or spaces counted
+//   6.  min_len   minimal sequence length           , with gaps or spaces counted
+//   7.  avg_len   average sequence length           , with gaps or spaces counted
+//   8.  max_len   miximal sequence length           , with gaps or spaces counted
+//   9.  Q1        first quartile of sequence length , with gaps or spaces counted
+//   10. Q2        median of sequence length         , with gaps or spaces counted
+//   11. Q3        third quartile of sequence length , with gaps or spaces counted
+//   12. sum_gap   number of gaps
+//   13. N50       N50. https://en.wikipedia.org/wiki/N50,_L50,_and_related_statistics#N50
+//   14. Q20(%)    percentage of bases with the quality score greater than 20
+//   15. Q30(%)    percentage of bases with the quality score greater than 30
+//   16. GC(%)     percentage of GC content
+//
+// Basic is sum_len min_len avg_len max_len
+#[derive(Serialize, Deserialize, Debug, Clone)]
+pub struct SeqKitFastaData {
+    filename: String,
+    format: String,
+    datatype: String,
+    num_seqs: i32,
+    sum_len: i32,
+    min_len: i32,
+    avg_len:f32,
+    max_len: i32,
+}
+
+
+
+#[tauri::command]
+pub fn get_seqstats(filename: String) -> SeqKitFastaData {
+
+    let mut count = 0;
+    // let mut lengths = vec![] ;
+    let mut lengths: Vec<i32> = Vec::new();
+
+
+    let mut reader = File::open(&filename)
+      .map(BufReader::new)
+        .map(fasta::Reader::new).unwrap();
+
+    for result in reader.records() {
+        count = count + 1;
+
+        let record = result.unwrap();
+        println!("{}\t{}", record.name(), record.sequence().len());
+        
+        let reclength =  record.sequence().len();
+        lengths.push(reclength as i32);
+    };
+
+    
+    let total = lengths.iter().sum();
+    let min_value = *lengths.iter().min().unwrap_or(&0);    
+    let max_value = *lengths.iter().max().unwrap_or(&0);
+    
+    let avg = (total / count) as f32;
+
+
+    let stats = SeqKitFastaData {
+        filename: filename,
+        format: "Fasta".to_string(),
+        datatype: "DNA".to_string(),
+        num_seqs: count,
+        sum_len: total,
+        avg_len: avg,
+        min_len: min_value,
+        max_len: max_value,
+    };
+
+    stats
+}
+
+
+
+
+
+
+//  Convert Fastq to Fasta -------------------------------------------------------------------------------------------------------------------
 
 pub fn convert_fastq_to_fasta(input_path: &str, output_path: &str)  ->  io::Result<()> {
 
@@ -70,11 +203,21 @@ pub fn convert_fastq_to_fasta_tauri(input_path: &str, output_path: &str)  -> Res
 
 
 
+
 #[cfg(test)]
 mod tests {
     use super::*;
     use tempfile::NamedTempFile;
     use filesize::PathExt;
+
+    #[test]
+    fn test_get_stats() {
+        let result = get_stats("testdata/fastx/small.fasta".to_string());
+        let FastaData {maxlength, recordcount} = result;
+        assert_eq!(maxlength, 34);
+        assert_eq!(recordcount, 2);
+    }
+
 
 
     #[test]
