@@ -1,9 +1,5 @@
 // use std::io::prelude::*;
-use std::io::{
-    self,
-    BufReader,
-    BufWriter,
-};
+use std::io::{self, BufReader, BufWriter};
 
 use std::fs::File;
 use std::path::Path;
@@ -15,9 +11,6 @@ use fasta::record::Definition as FastaDefinition;
 use noodles_fasta as fasta;
 use noodles_fastq as fastq;
 
-
-
-
 //  Get Stats -------------------------------------------------------------------------------------------------------------------
 
 #[derive(Serialize, Deserialize)]
@@ -26,28 +19,26 @@ pub struct FastaData {
     maxlength: i32,
 }
 
-
-
 #[tauri::command(rename_all = "snake_case")]
 pub fn get_stats(filename: String) -> FastaData {
-
     let mut count = 0;
     let mut maxlength = 0;
 
     let mut reader = File::open(&filename)
-      .map(BufReader::new)
-        .map(fasta::Reader::new).unwrap();
+        .map(BufReader::new)
+        .map(fasta::Reader::new)
+        .unwrap();
 
     for result in reader.records() {
         count = count + 1;
         let record = result.unwrap();
         println!("{}\t{}", record.name(), record.sequence().len());
-        let reclength =  record.sequence().len();
+        let reclength = record.sequence().len();
 
         if reclength > maxlength {
             maxlength = reclength
         }
-    };
+    }
 
     let stats = FastaData {
         recordcount: count,
@@ -57,11 +48,7 @@ pub fn get_stats(filename: String) -> FastaData {
     stats
 }
 
-
-
-
 //  Get Advanced Stats  -------------------------------------------------------------------------------------------------------------------
-
 
 // simple statistics of FASTA/Q files
 // Columns:
@@ -91,41 +78,36 @@ pub struct SeqKitFastaData {
     num_seqs: i32,
     sum_len: i32,
     min_len: i32,
-    avg_len:f32,
+    avg_len: f32,
     max_len: i32,
 }
 
-
-
 #[tauri::command]
 pub fn get_seqstats(filename: String) -> SeqKitFastaData {
-
     let mut count = 0;
     // let mut lengths = vec![] ;
     let mut lengths: Vec<i32> = Vec::new();
 
-
     let mut reader = File::open(&filename)
-      .map(BufReader::new)
-        .map(fasta::Reader::new).unwrap();
+        .map(BufReader::new)
+        .map(fasta::Reader::new)
+        .unwrap();
 
     for result in reader.records() {
         count = count + 1;
 
         let record = result.unwrap();
         println!("{}\t{}", record.name(), record.sequence().len());
-        
-        let reclength =  record.sequence().len();
+
+        let reclength = record.sequence().len();
         lengths.push(reclength as i32);
-    };
+    }
 
-    
     let total = lengths.iter().sum();
-    let min_value = *lengths.iter().min().unwrap_or(&0);    
+    let min_value = *lengths.iter().min().unwrap_or(&0);
     let max_value = *lengths.iter().max().unwrap_or(&0);
-    
-    let avg = (total / count) as f32;
 
+    let avg = (total / count) as f32;
 
     let stats = SeqKitFastaData {
         filename: filename,
@@ -141,15 +123,9 @@ pub fn get_seqstats(filename: String) -> SeqKitFastaData {
     stats
 }
 
-
-
-
-
-
 //  Convert Fastq to Fasta -------------------------------------------------------------------------------------------------------------------
 
-pub fn convert_fastq_to_fasta(input_path: &str, output_path: &str)  ->  io::Result<()> {
-    
+pub fn convert_fastq_to_fasta(input_path: &str, output_path: &str) -> io::Result<()> {
     let mut reader = File::open(input_path)
         .map(BufReader::new)
         .map(fastq::Reader::new)?;
@@ -160,97 +136,73 @@ pub fn convert_fastq_to_fasta(input_path: &str, output_path: &str)  ->  io::Resu
         .map(fasta::Writer::new)?;
 
     for result in reader.records() {
-        
         // this is all to convert from Fastq to fasta. Bit of a pain but ....
         let record = result?;
-        let recname =  String::from_utf8(record.name().to_vec()).unwrap();
-        let recdescription =  String::from_utf8(record.description().to_vec()).unwrap();
-        let fasta_definition = FastaDefinition::new(
-            recname,
-            Some(recdescription),
-        );
+        let recname = String::from_utf8(record.name().to_vec()).unwrap();
+        let recdescription = String::from_utf8(record.description().to_vec()).unwrap();
+        let fasta_definition = FastaDefinition::new(recname, Some(recdescription));
         let fasta_record = fasta::Record::new(
             fasta_definition,
             fasta::record::Sequence::from(record.sequence().to_vec()),
         );
-        
+
         fasta_writer.write_record(&fasta_record)?;
     }
 
     Ok(())
-
 }
-
-
-
 
 // Note: in theory I shouldn't need this function at all but.... here it is.
 // the issue is that the ```
 #[tauri::command(rename_all = "snake_case")]
-pub fn convert_fastq_to_fasta_tauri(input_path: &str, output_path: &str)  -> Result<String, String> {
+pub fn convert_fastq_to_fasta_tauri(input_path: &str, output_path: &str) -> Result<String, String> {
     println!("filpaths: {}  and {} ", input_path, output_path);
     println!("We're in the conversion funtion!");
-    let results = convert_fastq_to_fasta( input_path, output_path);
+    let results = convert_fastq_to_fasta(input_path, output_path);
     println!("We've exited the conversion function!");
     if results.is_ok() {
-        Ok( format!("Fasta file {output_path} has been created!")) 
+        Ok(format!("Fasta file {output_path} has been created!"))
     } else {
         Err("This failed!".to_string())
     }
 }
 
-
-
-
-
 #[cfg(test)]
 mod tests {
     use super::*;
-    use tempfile::NamedTempFile;
     use filesize::PathExt;
+    use tempfile::NamedTempFile;
 
     #[test]
     fn test_get_stats() {
         let result = get_stats("testdata/fastx/small.fasta".to_string());
-        let FastaData {maxlength, recordcount} = result;
+        let FastaData {
+            maxlength,
+            recordcount,
+        } = result;
         assert_eq!(maxlength, 34);
         assert_eq!(recordcount, 2);
     }
 
-
-
     #[test]
     fn test_convert_fastq_fasta() {
-        
         let temp_file = NamedTempFile::new().expect("Failed to create temp file");
         let output_path = temp_file.path().to_str().unwrap();
-        let result = convert_fastq_to_fasta(
-            "testdata/fastx/small.fastq",
-            output_path,
-        );
-        
+        let result = convert_fastq_to_fasta("testdata/fastx/small.fastq", output_path);
+
         assert!(result.is_ok());
         assert!(temp_file.path().exists());
         assert!(temp_file.path().size_on_disk().unwrap() != 0);
-
     }
-
 
     #[test]
     fn test_convert_fastq_fasta_tauri() {
-        
         let temp_file = NamedTempFile::new().expect("Failed to create temp file");
         let output_path = temp_file.path().to_str().unwrap();
-        let result = convert_fastq_to_fasta_tauri(
-            "testdata/fastx/small.fastq",
-            output_path,
-        );
+        let result = convert_fastq_to_fasta_tauri("testdata/fastx/small.fastq", output_path);
 
         assert!(result.is_ok());
         assert!(temp_file.path().exists());
         assert!(temp_file.path().size_on_disk().unwrap() != 0);
-
     }
-
-
 }

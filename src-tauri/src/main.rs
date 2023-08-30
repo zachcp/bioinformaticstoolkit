@@ -3,50 +3,33 @@
 
 mod sequences;
 
-
 // use std::io::prelude::*;
-use std::io::BufReader;
-use std::fs::File;
-use std::vec::Vec;
-use std::str;
+use bio::pattern_matching::bndm;
 use noodles_fasta as fasta;
 use serde::{Deserialize, Serialize};
-use bio::pattern_matching::bndm;
+use std::fs::File;
+use std::io::BufReader;
+use std::str;
+use std::vec::Vec;
 
+use sequences::fastx::{self, convert_fastq_to_fasta_tauri, get_seqstats, get_stats};
 
-use sequences::fastx::{
-    self,
-    get_stats,
-    get_seqstats,
-    convert_fastq_to_fasta_tauri
-};
-
-use sequences::patterns::{
-    check_restriction_sites
-};
-
+use sequences::patterns::check_restriction_sites;
 
 fn main() {
-
     tauri::Builder::default()
-        .invoke_handler(
-            tauri::generate_handler![
-                get_stats, 
-                get_seqstats, 
-                check_restriction_sites, 
-                convert_fastq_to_fasta_tauri
-                ])
+        .invoke_handler(tauri::generate_handler![
+            get_stats,
+            get_seqstats,
+            check_restriction_sites,
+            convert_fastq_to_fasta_tauri
+        ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
-
-
-
 
 #[cfg(test)]
 mod tests {
     // Note this useful idiom: importing names from outer (for mod tests) scope.
     // use super::*;
-
-
 }
