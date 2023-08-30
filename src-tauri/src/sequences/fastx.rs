@@ -5,16 +5,13 @@ use std::io::{
     BufWriter,
 };
 
-
 use std::fs::File;
 use std::path::Path;
 use std::str;
 
-
 use fasta::record::Definition as FastaDefinition;
 use noodles_fasta as fasta;
 use noodles_fastq as fastq;
-
 
 
 
@@ -55,7 +52,8 @@ pub fn convert_fastq_to_fasta(input_path: &str, output_path: &str)  ->  io::Resu
 
 
 
-// Note: theres gott abe abetter way to handle this tauri issue....
+// Note: in theory I shouldn't need this function at all but.... here it is.
+// the issue is that the ```
 #[tauri::command(rename_all = "snake_case")]
 pub fn convert_fastq_to_fasta_tauri(input_path: &str, output_path: &str)  -> Result<String, String> {
     println!("filpaths: {}  and {} ", input_path, output_path);
@@ -63,7 +61,7 @@ pub fn convert_fastq_to_fasta_tauri(input_path: &str, output_path: &str)  -> Res
     let results = convert_fastq_to_fasta( input_path, output_path);
     println!("We've exited the conversion function!");
     if results.is_ok() {
-        Ok("This worked!".to_string()) 
+        Ok( format!("Fasta file {output_path} has been created!")) 
     } else {
         Err("This failed!".to_string())
     }

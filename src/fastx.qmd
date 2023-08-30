@@ -44,7 +44,10 @@ viewof fasta_stats = Inputs.button(
     });
 
 
-fasta_stats
+
+fasta_stats_realized = (fasta_stats == null) ? "Click Above to Get Fasta Statistics" : fasta_stats
+
+fasta_stats_realized
 
 ```
 
@@ -66,21 +69,15 @@ viewof convert_stats = Inputs.button(
             .then( function (fqname) {
                 let fasta_name = fqname.split(".").slice(0,-1).join(".");
                 fasta_name = fasta_name + "_converted.fasta"
-                return [fqname, fasta_name]})
-            .then(function (files) {
-                let [fqname, faname] = files;
-                console.log(fqname);
-                console.log(faname);
-                return invoke("convert_fastq_to_fasta_tauri", {input_path: fqname, output_path: faname})
-            })
-            // .then(function (results) {
-            //     console.log(results);
-            //     return results
-            // }
-            // )
-        });
+                return invoke("convert_fastq_to_fasta_tauri", {input_path: fqname, output_path: fasta_name})
+                }
+            )
+    }
+);
 
-convert_stats
+stats = (convert_stats == null) ? "Click Above to Convert" : convert_stats
+
+stats
 
 ```
 
