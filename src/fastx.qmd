@@ -5,10 +5,15 @@ title: "Fastx Utilities"
 FastX Utilities
 
 
+# Basic stats
+
+
 ```{ojs}
+//| echo: false
+//| 
+// support functions
 invoke = window.__TAURI__.tauri.invoke;
 open   = window.__TAURI__.dialog.open;
-ask    = window.__TAURI__.dialog.ask;
 
 // use the tauri open to get absolute file paths
 async function choosefasta(){
@@ -21,22 +26,89 @@ async function choosefasta(){
     return selected
 };
 
-
-viewof fasta_stats = Inputs.button(
-    "Calculate State 2", 
-    { 
-        value: null, 
-        reduce: () => choosefasta().then((fname) => invoke("get_seqstats", {filename: fname}).then()) 
+async function choosefastq(){
+    const selected = open({
+        multiple: false,
+        filters: [{
+            name: 'Fastq',
+            extensions: ['fq', 'fastq']}]
     });
-
-fasta_stats
+    return selected
+};
 
 ```
 
 
 ```{ojs}
+//|  code-fold: true
 
-htl.html`<p>I am a <i>paragraph</i> ${fasta_stats} </p>`
+viewof fasta_stats = Inputs.button(
+    "Get Fasta Stats", 
+    { 
+        value: null, 
+        reduce: () => choosefasta().then((fname) => invoke("get_stats", {filename: fname})) 
+    });
+
+fasta_stats_realized = (fasta_stats == null) ? "Click Above to Get Fasta Statistics" : fasta_stats
+fasta_stats_realized
 
 ```
 
+# SeqKit stats
+
+```{ojs}
+//|  code-fold: true
+
+viewof fasta_stats_seqkit = Inputs.button(
+    "Get Fasta Stats", 
+    { 
+        value: null, 
+        reduce: () => choosefasta().then((fname) => invoke("get_seqstats", {filename: fname})) 
+    });
+
+
+fasta_stats_seqkit_realized = (fasta_stats_seqkit == null) ? "Click Above to Get Fasta Statistics" : fasta_stats_seqkit
+fasta_stats_seqkit_realized
+
+```
+
+
+
+# Convert Fastq to Fasta
+
+
+```{ojs}
+//|  code-fold: true
+
+viewof convert_stats = Inputs.button(
+    "Convert FastQ to Fasta", 
+    { 
+        value: null, 
+        reduce: () => choosefastq()
+            .then( function (fqname) {
+                let fasta_name = fqname.split(".").slice(0,-1).join(".");
+                fasta_name = fasta_name + "_converted.fasta"
+                return invoke("convert_fastq_to_fasta_tauri", {input_path: fqname, output_path: fasta_name})})});
+
+
+convert_stats_realized = (convert_stats == null) ? "Click Above to Convert" : convert_stats
+convert_stats_realized
+
+```
+
+
+
+# Restriction Enzyme Analysis
+
+Here we search for Restriction enzymes in DNA sequences. The current setup  will return the locations of the match on teh forward sequence.
+
+
+```{ojs}
+//|  code-fold: true
+
+viewof text = Inputs.textarea({label: "DNA For Searching", placeholder: "DNA Goes here", submit: true})
+
+re_sites =  (text == "") ? []: invoke("check_restriction_sites", {sequence: text})
+re_sites
+
+```
