@@ -149,7 +149,6 @@ pub fn get_seqstats(filename: String) -> SeqKitFastaData {
 //  Convert Fastq to Fasta -------------------------------------------------------------------------------------------------------------------
 
 pub fn convert_fastq_to_fasta(input_path: &str, output_path: &str)  ->  io::Result<()> {
-
     
     let mut reader = File::open(input_path)
         .map(BufReader::new)

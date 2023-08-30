@@ -38,6 +38,7 @@ async function choosefastq(){
 
 ```
 
+
 ```{ojs}
 //|  code-fold: true
 
@@ -45,15 +46,31 @@ viewof fasta_stats = Inputs.button(
     "Get Fasta Stats", 
     { 
         value: null, 
-        reduce: () => choosefasta().then((fname) => invoke("get_seqstats", {filename: fname})) 
+        reduce: () => choosefasta().then((fname) => invoke("get_stats", {filename: fname})) 
     });
-
 
 fasta_stats_realized = (fasta_stats == null) ? "Click Above to Get Fasta Statistics" : fasta_stats
 fasta_stats_realized
 
 ```
 
+# SeqKit stats
+
+```{ojs}
+//|  code-fold: true
+
+viewof fasta_stats_seqkit = Inputs.button(
+    "Get Fasta Stats", 
+    { 
+        value: null, 
+        reduce: () => choosefasta().then((fname) => invoke("get_seqstats", {filename: fname})) 
+    });
+
+
+fasta_stats_seqkit_realized = (fasta_stats_seqkit == null) ? "Click Above to Get Fasta Statistics" : fasta_stats_seqkit
+fasta_stats_seqkit_realized
+
+```
 
 
 
