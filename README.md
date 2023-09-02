@@ -61,6 +61,38 @@ DNA Analysis:
   - Pangenome TK: https://github.com/GeneDx/pgr-tk (cdep in the build)
   - RE digest and assembly calculations
 
+
+
+VCF:
+    - convert
+    - concat
+    - split
+
+RNA Secondary Structure:
+  - [x] RNApkin https://lib.rs/crates/rnapkin
+
+
+rna-seq:
+    - gencounts https://github.com/NKI-GCF/gensum
+    - rust-lapper https://crates.io/crates/rust-lapper
+
+
+Taxonomy:
+    - load and display a tree file
+    - load and display kraken
+    - load and display bracken
+
+Peptides and Proteomics: 
+  - [unipept](https://crates.io/crates/umgap)
+
+
+Software: 
+
+- [Pangenomer](https://github.com/marschall-lab/panacus)
+- [rust-bio](https://github.com/rust-bio/rust-bio)
+- [rust-bio-tools](https://github.com/rust-bio/rust-bio-tools)
+
+
 Miscelleaneous:
   - Genome Card: e.g viz with global genome statistics.
     - Genome name, overview, produces compounds
@@ -98,36 +130,3 @@ Miscelleaneous:
  - [flate2](https://docs.rs/flate2/latest/flate2/)use flate2::read::MultiGzDecoder;
  - [bio_streams](https://github.com/jeff-k/bio-streams) 
   - Streaming iterators for bioinformatics data 
-
-
-VCF:
-    - convert
-    - concat
-    - split
-
-RNA Secondary Structure:
-  - RNApkin https://lib.rs/crates/rnapkin
-
-
-rna-seq:
-    - gencounts https://github.com/NKI-GCF/gensum
-    - rust-lapper https://crates.io/crates/rust-lapper
-
-
-Taxonomy:
-    - load and display a tree file
-    - load and display kraken
-    - load and display bracken
-
-Peptides and Proteomics: 
-  - [unipept](https://crates.io/crates/umgap)
-
-  
-
-
-Software: 
-
-- [Pangenomer](https://github.com/marschall-lab/panacus)
-- [rust-bio](https://github.com/rust-bio/rust-bio)
-- [rust-bio-tools](https://github.com/rust-bio/rust-bio-tools)
-
