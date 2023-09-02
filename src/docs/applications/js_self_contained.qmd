@@ -1,5 +1,5 @@
 ---
-title: "Javascript"
+title: "Self Contained Javascript"
 self-contained: true
 ---
 
@@ -9,7 +9,6 @@ the document YAML headmatter.
 - You can download libraries as per the [OJS cell docs](https://quarto.org/docs/interactive/ojs/libraries.html)
 - You can use Observable's "[How to require stubborn modules](https://observablehq.com/@observablehq/how-to-require-stubborn-modules)" to help troubleshoot module imports
 - if you have the modules specific correctly and the self-contained=true is set then you will get JS that is selfcontianed and doesn't attempt to talk to the internet form Tauri (it won't be able to anyway but it will throw an error)
-
 
 
 ```yaml

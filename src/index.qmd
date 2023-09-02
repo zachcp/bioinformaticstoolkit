@@ -1,6 +1,49 @@
 ---
-title: "The Bioinformatics Toolkit"
-self-contained: false
+pagetitle: "The Bioinformatics Toolkit"
+page-layout: custom
+hide-description: true
+section-divs: false
+toc: false
+css: index.css
+description: | 
+  A locally run suite of bioinformatics powered by Rust with Tauri and Quarto and a reactive frontend provided by ObservableHQ.
+
 ---
 
 
+:::{.hero-banner}
+
+
+:::{.content-block}
+
+:::{.hero-text}
+# Welcome to The Bioinformatics Toolkit.
+
+### Run bioinformatics utilities locally with the power/speed of  Rust.
+
+- Create core logic in blazing-fast [Rust](https://www.rust-lang.org/).
+- Package your functions and expose outputs to the frontend with [Tauri](https://tauri.app/)
+- Take advantage of fast, battle-tested bioinformatics libraries like [Noodles](https://github.com/zaeleus/noodles) and [rust-bio](https://github.com/rust-bio/rust-bio) or exciting new-comers like [exon](https://github.com/wheretrue/exon) for integration into to wider Rust data ecosystem.
+- Use the power of the Rust [ecosystem of libraries](https://crates.io/) to [explore](https://lib.rs/) and harness high performance libraries.
+- Use Rust/Tauri to build a cross-functional, installable binary of <10Mb.
+
+
+
+### Vizualize and interpret your results with the power of Quarto.
+
+- Write you app frontend in Markdown + OJS using [Quarto](https://quarto.org/).
+- Quarto's builtin [Observable cells](https://quarto.org/docs/computations/ojs.html) make it easy to dip into the power of Observable including the power of the [stdlib](https://github.com/observablehq/stdlib); [Inputs](https://observablehq.com/@observablehq/inputs); and [Plot](https://observablehq.com/plot/); 
+- Include additional JS libraries for fetching/bundling at build-time 
+
+
+
+:::{.hero-buttons}
+[Get Started](docs/guide/){.btn-action-primary .btn-action .btn .btn-success .btn-lg role="button"}
+[Guide](docs/guide/){#btn-guide .btn-action .btn .btn-info .btn-lg role="button"}
+::: 
+
+:::
+
+:::
+
+:::

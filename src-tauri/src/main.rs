@@ -13,14 +13,15 @@ use std::str;
 use std::vec::Vec;
 
 use sequences::fastx::{self, convert_fastq_to_fasta_tauri, get_seqstats, get_stats};
-
 use sequences::patterns::check_restriction_sites;
+use sequences::rnapkin::rnapkin_fn;
 
 fn main() {
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![
             get_stats,
             get_seqstats,
+            rnapkin_fn,
             check_restriction_sites,
             convert_fastq_to_fasta_tauri
         ])

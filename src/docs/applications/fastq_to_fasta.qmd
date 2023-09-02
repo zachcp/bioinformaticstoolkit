@@ -1,0 +1,46 @@
+
+---
+title: "Fastq to fasta conversion"
+---
+
+
+
+# Convert Fastq to Fasta
+
+```{ojs}
+//| echo: false
+//| 
+// support functions
+invoke = window.__TAURI__.tauri.invoke;
+open   = window.__TAURI__.dialog.open;
+```
+
+
+```{ojs}
+//|  code-fold: true
+
+async function choosefastq(){
+    const selected = open({
+        multiple: false,
+        filters: [{
+            name: 'Fastq',
+            extensions: ['fq', 'fastq']}]
+    });
+    return selected
+};
+
+viewof convert_stats = Inputs.button(
+    "Convert FastQ to Fasta", 
+    { 
+        value: null, 
+        reduce: () => choosefastq()
+            .then( function (fqname) {
+                let fasta_name = fqname.split(".").slice(0,-1).join(".");
+                fasta_name = fasta_name + "_converted.fasta"
+                return invoke("convert_fastq_to_fasta_tauri", {input_path: fqname, output_path: fasta_name})})});
+
+
+convert_stats_realized = (convert_stats == null) ? "Click Above to Convert" : convert_stats
+convert_stats_realized
+
+```

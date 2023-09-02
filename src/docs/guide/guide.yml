@@ -1,0 +1,78 @@
+  
+- title: Fasta Utilities
+  subtitle: Working with Fasta Files
+  links:
+    - text: Simple Example
+      href: ../applications/fasta_simple.qmd
+    - text: Fastx Stats
+      href: ../applications/fastx_stats.qmd
+    - text: Fastq to Fasta
+      href: ../applications/fastq_to_fasta.qmd
+    - text: Self Contained JS
+      href: ../applications/is_self_contained.qmd
+    
+
+- title: RNA Vizualization
+  subtitle: Vizualize RNA secodnary Structure
+  links:
+    - text: "RNAPkin"
+      href: ../applications/rna_rnapkin_viz.qmd
+
+
+- title: Tools
+  subtitle: "Use your favorite tools with Quarto"
+  links: 
+    - text: JupyterLab
+      href: ../tools/jupyter-lab.qmd
+    - text: RStudio IDE
+      href: ../tools/rstudio.qmd
+    - text: VS Code
+      href: ../tools/vscode.qmd
+    - text: Neovim
+      href: ../tools/neovim.qmd
+    - text: Text Editors
+      href: ../tools/text-editors.qmd
+    - text: Visual Editor
+      href: ../visual-editor/index.qmd
+
+- title: Documents
+  subtitle: Generate output in many formats
+  links:
+    - text: HTML
+      href: ../output-formats/html-basics.qmd
+    - text: PDF
+      href: ../output-formats/pdf-basics.qmd
+    - text: MS Word
+      href: ../output-formats/ms-word.qmd
+    - text: Markdown
+      href: ../output-formats/gfm.qmd
+    - text: All Formats
+      href: ../output-formats/all-formats.qmd      
+            
+- title: Books
+  subtitle: Create books and manuscripts
+  links:
+   - text: "Creating a Book" 
+     href:  ../books/book-basics.qmd
+   - text: "Book Structure"
+     href: ../books/book-structure.qmd
+   - text: "Book Crossrefs"
+     href: ../books/book-crossrefs.qmd
+   - text: "Customizing Output"
+     href: ../books/book-output.qmd    
+  
+- title: Interactivity
+  subtitle: Engage readers with interactivity
+  links:
+    - text: Overview
+      href: ../interactive/index.qmd
+    - text: Observable JS
+      href: ../interactive/ojs/index.qmd
+    - text: Shiny
+      href: ../interactive/shiny/index.qmd
+    - text: Widgets
+      href: ../interactive/widgets/jupyter.qmd
+    - text: Component Layout
+      href: ../interactive/layout.qmd
+
+  

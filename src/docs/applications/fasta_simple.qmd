@@ -1,0 +1,57 @@
+---
+title: "Simple Fasta"
+---
+
+
+
+# Basic stats
+
+
+```{ojs}
+//| echo: false
+//| 
+// support functions
+invoke = window.__TAURI__.tauri.invoke;
+open   = window.__TAURI__.dialog.open;
+
+
+// use the tauri open to get absolute file paths
+async function choosefasta(){
+    const selected = open({
+        multiple: false,
+        filters: [{
+            name: 'Fasta',
+            extensions: ['fa', 'fasta', 'fna']}]
+    });
+    return selected
+};
+
+async function choosefastq(){
+    const selected = open({
+        multiple: false,
+        filters: [{
+            name: 'Fastq',
+            extensions: ['fq', 'fastq']}]
+    });
+    return selected
+};
+
+```
+
+
+
+```{ojs}
+//|  code-fold: true
+
+viewof fasta_stats = Inputs.button(
+    "Get Fasta Stats", 
+    { 
+        value: null, 
+        reduce: () => choosefasta().then((fname) => invoke("get_stats", {filename: fname})) 
+    });
+
+fasta_stats_realized = (fasta_stats == null) ? "Click Above to Get Fasta Statistics" : fasta_stats
+fasta_stats_realized
+
+```
+
