@@ -8,17 +8,67 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - href: javascript.qmd
-        text: Javascript
-      - href: fastx.qmd
-        text: fastx
+      - href: docs/guide/index.qmd
+        text: Applications
+      - text: "Help"
+        menu:
+          - text: "Report a Bug"
+            icon: "bug"
+            href: "https://github.com/quarto-dev/quarto-cli/issues"
+          - text: "Ask a Question"
+            icon: "chat-right-text"
+            href: "https://github.com/quarto-dev/quarto-cli/discussions"
+          - text: "FAQ"
+            icon: "question-circle"
+            href: docs/faq/index.qmd
+
+  sidebar:
+    - id: get-started
+      title: "Get Started"
+      style: "floating"
+      collapse-level: 2
+      align: left
+      contents:
+        - text: "Tutorial: Hello, Quarto"
+          href: docs/get-started/hello/
+        - text: "Tutorial: Computations"
+          href: docs/get-started/computations/
+        - text: "Tutorial: Authoring"
+          href: docs/get-started/authoring/
+    - id: guide
+      collapse-level: 0
+      contents:
+        - section: "Guide"
+          href: docs/guide/index.qmd
+          contents:
+          - section: "Applications"
+            contents:
+              - docs/applications/fasta_simple.qmd
+              - docs/applications/fastx_stats.qmd
+              - docs/applications/fastq_to_fasta.qmd
+              - docs/applications/restriction_enzyme_analysis.qmd
+              - docs/applications/rna_rnapkin_viz.qmd
+              - docs/applications/js_self_contained.qmd
+
 
 format:
   html:
-    self-contained: true
     theme: cosmo
     css: styles.css
     toc: true
 
+# bibliography: references.bib
 
-
+# format:
+#   html:
+#     toc: true
+#     theme:
+#       light: [cosmo, theme.scss]
+#     code-copy: true
+#     code-overflow: wrap
+#     css: styles.css
+#     include-after-body: js.html
+#     grid:
+#       sidebar-width: 250px
+#       body-width: 900px
+#       margin-width: 300px

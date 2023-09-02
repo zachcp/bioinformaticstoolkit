@@ -1,0 +1,15 @@
+---
+title: "Guide"
+subtitle: Comprehensive guide to using Quarto. If you are just starting out, you may want to  explore the [tutorials](../get-started/index.qmd) to learn the basics.
+page-layout: article
+anchor-sections: false
+search: false
+listing:
+  id: guide-links
+  template: ../../ejs/links.ejs
+  contents: guide.yml
+image: /images/hero_right.png
+---
+
+::: {#guide-links .column-screen-inset-right style="max-width: 850px;"}
+:::
