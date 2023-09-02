@@ -2,7 +2,6 @@
 use std::io::{self, BufReader, BufWriter};
 
 use std::fs::File;
-use std::path::Path;
 use std::str;
 
 use serde::{Deserialize, Serialize};
@@ -195,7 +194,6 @@ mod tests {
         assert!(temp_file.path().size_on_disk().unwrap() != 0);
     }
 
-    
     #[test]
     fn test_convert_fastq_fasta_tauri() {
         let temp_file = NamedTempFile::new().expect("Failed to create temp file");
