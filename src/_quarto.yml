@@ -36,7 +36,7 @@ website:
         - text: "Tutorial: Authoring"
           href: docs/get-started/authoring/
     - id: guide
-      collapse-level: 0
+      collapse-level: 3
       contents:
         - section: "Guide"
           href: docs/guide/index.qmd

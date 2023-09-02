@@ -16,7 +16,7 @@
   subtitle: Vizualize RNA secodnary Structure
   links:
     - text: "RNAPkin"
-      href: ../applicationsrna_rnapkin_viz.qmd
+      href: ../applications/rna_rnapkin_viz.qmd
 
 
 - title: Tools

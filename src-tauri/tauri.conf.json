@@ -47,8 +47,8 @@
         "fullscreen": false,
         "resizable": true,
         "title": "The Bioinformatics Toolkit",
-        "width": 900,
-        "height": 600
+        "width": 1500,
+        "height": 1000
       }
     ]
   }
