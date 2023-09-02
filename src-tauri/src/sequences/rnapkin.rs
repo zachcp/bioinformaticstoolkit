@@ -7,19 +7,28 @@ use rnapkin::utils::ParsedInput;
 
 
 
-#[tauri::command]
-pub fn rnapkin_fn(sequence: &str) -> String {
+#[tauri::command(rename_all = "snake_case")]
+pub fn rnapkin_fn(sequence: &str, height: u32, color_theme: &str, mirror_x: bool, mirror_y: bool) -> String {
+
+     let color_theme_rs =  match color_theme.as_ref() {
+        "dark" => ColorTheme::dark(), 
+        "white" => ColorTheme::white(), 
+        "black" => ColorTheme::black(), 
+        "bright" => ColorTheme::bright(), 
+        "default" => ColorTheme::default(),
+        _ =>  ColorTheme::default()
+     };
+
 
     let mut lines = sequence.split("\n").map(|x| x.to_string());
         
     // https://github.com/ukmrs/rnapkin/blob/main/src/main.rs#L61
     // pi
     let pi = rnapkin::utils::ParsedInput::parse(&mut lines).unwrap();
-    let height = 900;
-    let BUBBLE_RADIUS: f64 = 0.5;
-        
+    //let height = 900;
+    let BUBBLE_RADIUS: f64 = 0.5;     
     let filename = PathBuf::from("o.x");
-    let mut theme = ColorTheme::dark();
+    // let mut theme = ColorTheme::dark();
     
     println!("{:?}", pi);
     let (pairlist, sequence) = match (pi.secondary_structure, pi.sequence) {
@@ -29,7 +38,7 @@ pub fn rnapkin_fn(sequence: &str) -> String {
             assert_eq!(
                 pl.len(),
                 seq.len(),
-                "sequence and structure have differents lenghts!"
+                "sequence and structure have differents lengths!"
             );
             (pl, seq)
         }
@@ -45,9 +54,9 @@ pub fn rnapkin_fn(sequence: &str) -> String {
     };
 
     let tree = forest::grow_tree(&pairlist);
-    let mut bubbles =
+    let bubbles =
         draw::gather_bubbles(&tree, &sequence, BUBBLE_RADIUS, 0.0_f64.to_radians());
-    let mirror = Mirror::new(false, false);
+    let mirror = Mirror::new(mirror_x, mirror_y);
 
     let highlights = match pi.highlight {
         Some(hls) => draw::colors::user_input_to_highlight_indices(&hls),
@@ -58,7 +67,7 @@ pub fn rnapkin_fn(sequence: &str) -> String {
         &bubbles,
         BUBBLE_RADIUS,
         &filename,
-        &theme,
+        &color_theme_rs,
         height,
         mirror,
         &highlights,
