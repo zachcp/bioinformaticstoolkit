@@ -32,36 +32,38 @@ cd src-tauri && cargo test -- --nocapture
 
 
 FASTX:
-  - covert fasta to fastq
-  - basic stats of fasta/or fastq 
-  - merge PE reads
-  - split interleaved
-  - advanced stats including lenght histrogram.
-      - set some reasonable number of sequences for inclusion in the histrogrma before binning
-  - splitting into multiple files.
-  - filter bases on quality
-  - sample the reads based on a seed.
-  - length by quality metrics:
-      - optional hexagon plots
-  - coverage plots and 
-  - digestion locations
-  - Genome Card.
-    -  Genome name, overview, produces compounds
+  - [x] convert fasta to fastq
+  - [x] basic stats of fasta/fastq 
+  - [ ] histrogram of read lengths (possibly set max number)
+  - [ ] merge PE reads // split interleaved
+  - [ ] splitting into multiple files ( create directory ?)
+  - [ ] filter-fastx length // quality
+  - [ ] sample the fasta/x files
+  - [ ] plot: length x quality metrics ( optional hexagon plots ) 
+  - [ ] plot: coverage by location. 
+
+GFA:
+  - [ ] Utilites from [GFATK](https://docs.rs/gfatk/latest/gfatk/) including filtering
+    - [ ] GFAStats
+
 
 DNA Analysis:
-
   - Digestability of DNA sequences:
-      - Standard RE sites 
-      - Other Patterns to Avoid
-      - Genome View 
-      - Global view of Palettes and coding types
+      - [ ] Search for RE locations
+      - [ ] Other Patterns to Avoid
+      - [ ] Data: Standard RE enzymes
+      - [ ] Plot: Genome View of RE sites.
+      - [ ] Global view of Palettes and coding types
   - Insilico PCR: https://github.com/dlesl/pcr
-    - CLonifier: https://github.com/dlesl/clonifier
+    - Clonifier: https://github.com/dlesl/clonifier
+
   - Phenogram
-  - GFATK: https://github.com/tolkit/gfatk
-  - Plasmapr: https://github.com/BradyAJohnston/plasmapR
   - Pangenome TK: https://github.com/GeneDx/pgr-tk (cdep in the build)
   - RE digest and assembly calculations
+
+Miscelleaneous:
+  - Genome Card: e.g viz with global genome statistics.
+    - Genome name, overview, produces compounds
   - Utilities for Codons
   - [VCF plotein](https://vcfplotein.liigh.unam.mx/)
   - [ASGArt](https://github.com/delehef/asgart) (cdep in the build)
@@ -75,7 +77,6 @@ DNA Analysis:
   - [ggcat](https://github.com/algbio/ggcat)
   - [light motif](https://crates.io/crates/lightmotif)
   - [liftover with crusmapr](liftover)
-
   - [exon](https://docs.rs/exon/latest/exon)
   - [phylogeny](https://docs.rs/phylogeny/latest/phylogeny/) # not much action
 
@@ -93,13 +94,19 @@ DNA Analysis:
  - [preotienogenic](https://lib.rs/crates/proteinogenic)
  - [rdkit](https://lib.rs/crates/rdk)
  - [bigwig2bam](https://lib.rs/crates/bigwig2bam)
-
+ - Plasmapr: https://github.com/BradyAJohnston/plasmapR
+ - [flate2](https://docs.rs/flate2/latest/flate2/)use flate2::read::MultiGzDecoder;
+ - [bio_streams](https://github.com/jeff-k/bio-streams) 
+  - Streaming iterators for bioinformatics data 
 
 
 VCF:
     - convert
     - concat
     - split
+
+RNA Secondary Structure:
+  - RNApkin https://lib.rs/crates/rnapkin
 
 
 rna-seq:
