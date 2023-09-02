@@ -112,3 +112,32 @@ re_sites =  (text == "") ? []: invoke("check_restriction_sites", {sequence: text
 re_sites
 
 ```
+
+
+
+# RNApkin
+
+Try:
+
+```txt
+>fantastic guanine riboswitch
+AAUAUAAUAGGAACACUCAUAUAAUCGCGUGGAUAUGGCACGCAAGUUUCUACCGGGCAC
+..........(..(.((((.((((..(((((.......)))))..........((((((.
+CGUAAAUGUCCGACUAUGGGUGAGCAAUGGAACCGCACGUGUACGGUUUUUUGUGAUAUC
+......)))))).....((((((((((((((((((........))))))...........
+AGCAUUGCUUGCUCUUUAUUUGAGCGGGCAAUGCUUUUUUUA
+..)))))))))))).)))).)))).)..).............
+```
+
+
+```{ojs}
+
+viewof rna_text = Inputs.textarea({label: "RNA For Searching", placeholder: "RNA Napkin", submit: true})
+
+rna_text_realized =  (rna_text == "") ? []: invoke("rnapkin_fn", {sequence: rna_text})
+
+
+svg`${rna_text_realized}`
+
+
+```

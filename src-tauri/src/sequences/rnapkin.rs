@@ -16,7 +16,8 @@ pub fn rnapkin_fn(sequence: &str) -> String {
     // pi
     let pi = rnapkin::utils::ParsedInput::parse(&mut lines).unwrap();
     let height = 900;
-
+    let BUBBLE_RADIUS: f64 = 0.5;
+        
     let filename = PathBuf::from("o.x");
     let mut theme = ColorTheme::dark();
     
@@ -63,7 +64,7 @@ pub fn rnapkin_fn(sequence: &str) -> String {
         &highlights,
     ).unwrap();
     
-    svgout
+    svgout.unwrap()
 
 }
 
