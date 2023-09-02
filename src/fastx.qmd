@@ -130,35 +130,35 @@ AGCAUUGCUUGCUCUUUAUUUGAGCGGGCAAUGCUUUUUUUA
 ```
 
 
+```txt
+> offsam
+0000022222222223333333333333333333333333333333333444444444444444444444444444444
+AUAUCCGUUCUUAUCAAGAGAAGCAGAGGGACUGGCCCGACGAUGCUUCAGCAACCAGUGUAAUGGCGAUCAGCCAUGA
+.......((((((((....(((((...(((.....)))......)))))(((..(((((...(((((.....))))).)
+4444444444555555555555555555555555555522222222222211111111111111111111111111111
+CUAAGGUGCUAAAUCCAGCAAGCUCGAACAGCUUGGAAGAUAAGAAGAGACAAAAUCACUGACAAAGUCUUCUUCUUAA
+))..)).)))........((((((.....))))))...)))))))).................((((((.((((...))
+111111111111
+GAGGACUUUUUU
+)).))))))...
+```
+
 ```{ojs}
 //|  code-fold: true
 
-
-
-
-// angle
-// mirror_x
-// mirro_y
-// let BUBBLE_RADIUS: f64 = 0.5;
-// let filename = PathBuf::from("o.x");
-// let mut theme = ColorTheme::dark();
-// height
-// textarea
-//
 viewof rnapkin_params = Inputs.form({
-  height: Inputs.range([0, 900], {step: 10, label: "height", default: 400}),
-  color_theme : Inputs.select(["dark", "white", "black", "bright", "default"], {value: "default", label: "Color Theme"}),
+  height: Inputs.range([0, 900], {step: 10, label: "Height", default: 400}),
+  angle: Inputs.range([0, 360], {step: 1, label: "Angle", default: 0}),
+  bubble_radius: Inputs.range([0, 1], {step: 0.1, label: "Bubble Radius", default: 0.5, visible:false}),
   mirror_x: Inputs.toggle({label: "Flip X", value: false}),
-  mirror_y: Inputs.toggle({label: "Flip Y", value: false})
+  mirror_y: Inputs.toggle({label: "Flip Y", value: false}),
+  color_theme : Inputs.select(["dark", "white", "black", "bright", "default"], {value: "default", label: "Color Theme"})
 })
 
 
-rnapkin_params
-rnapkin_params.color_theme
 viewof rna_text = Inputs.textarea({label: "RNA For Searching", placeholder: "RNA Napkin", submit: true})
-// rna_text_realized =  (rna_text == "") ? []: invoke("rnapkin_fn", {sequence: rna_text, height: rnapkin_params.height, mirror_x: rnapkin_params.mirror_x, mirror_y: rnapkin_params.mirror_y})
-// rna_text_realized =  (rna_text == "") ? []: invoke("rnapkin_fn", {sequence: rna_text, height: rnapkin_params.height, color_theme: rnapkin_params.color_theme})
-rna_text_realized =  (rna_text == "") ? []: invoke("rnapkin_fn", {sequence: rna_text, height: rnapkin_params.height, color_theme: rnapkin_params.color_theme, mirror_x: rnapkin_params.mirror_x, mirror_y: rnapkin_params.mirror_y})
+rna_text_realized =  (rna_text == "") ? []: invoke("rnapkin_fn", {sequence: rna_text, height: rnapkin_params.height, color_theme: rnapkin_params.color_theme, mirror_x: rnapkin_params.mirror_x, mirror_y: rnapkin_params.mirror_y, rotation_angle:rnapkin_params.angle, bubble_radius: rnapkin_params.bubble_radius})
+
 svg`${rna_text_realized}`
 
 

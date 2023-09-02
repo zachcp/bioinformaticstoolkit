@@ -8,7 +8,7 @@ use rnapkin::utils::ParsedInput;
 
 
 #[tauri::command(rename_all = "snake_case")]
-pub fn rnapkin_fn(sequence: &str, height: u32, color_theme: &str, mirror_x: bool, mirror_y: bool) -> String {
+pub fn rnapkin_fn(sequence: &str, height: u32, color_theme: &str, mirror_x: bool, mirror_y: bool, rotation_angle: f64, bubble_radius: f64) -> String {
 
      let color_theme_rs =  match color_theme.as_ref() {
         "dark" => ColorTheme::dark(), 
@@ -24,13 +24,13 @@ pub fn rnapkin_fn(sequence: &str, height: u32, color_theme: &str, mirror_x: bool
         
     // https://github.com/ukmrs/rnapkin/blob/main/src/main.rs#L61
     // pi
-    let pi = rnapkin::utils::ParsedInput::parse(&mut lines).unwrap();
-    //let height = 900;
-    let BUBBLE_RADIUS: f64 = 0.5;     
-    let filename = PathBuf::from("o.x");
+    // let height = 900;
+    // let BUBBLE_RADIUS: f64 = 0.5;     
     // let mut theme = ColorTheme::dark();
+    let pi = rnapkin::utils::ParsedInput::parse(&mut lines).unwrap();
+    let filename = PathBuf::from("o.x");
     
-    println!("{:?}", pi);
+
     let (pairlist, sequence) = match (pi.secondary_structure, pi.sequence) {
         (Some(sst), Some(seq)) => {
             let pl = rnamanip::get_pair_list(&sst);
@@ -55,7 +55,7 @@ pub fn rnapkin_fn(sequence: &str, height: u32, color_theme: &str, mirror_x: bool
 
     let tree = forest::grow_tree(&pairlist);
     let bubbles =
-        draw::gather_bubbles(&tree, &sequence, BUBBLE_RADIUS, 0.0_f64.to_radians());
+        draw::gather_bubbles(&tree, &sequence, bubble_radius, rotation_angle.to_radians());
     let mirror = Mirror::new(mirror_x, mirror_y);
 
     let highlights = match pi.highlight {
@@ -65,7 +65,7 @@ pub fn rnapkin_fn(sequence: &str, height: u32, color_theme: &str, mirror_x: bool
 
     let svgout = draw::plot(
         &bubbles,
-        BUBBLE_RADIUS,
+        bubble_radius,
         &filename,
         &color_theme_rs,
         height,
