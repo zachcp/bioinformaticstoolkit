@@ -117,7 +117,7 @@ re_sites
 
 # RNApkin
 
-Try:
+Utility that uses [rnapkin](https://github.com/ukmrs/rnapkin),  a rust library that shows RNA secondary structure. Try:
 
 ```txt
 >fantastic guanine riboswitch
@@ -131,7 +131,8 @@ AGCAUUGCUUGCUCUUUAUUUGAGCGGGCAAUGCUUUUUUUA
 
 
 ```{ojs}
-
+//|  code-fold: true
+//| 
 viewof rna_text = Inputs.textarea({label: "RNA For Searching", placeholder: "RNA Napkin", submit: true})
 
 rna_text_realized =  (rna_text == "") ? []: invoke("rnapkin_fn", {sequence: rna_text})
