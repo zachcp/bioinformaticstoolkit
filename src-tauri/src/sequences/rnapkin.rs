@@ -88,6 +88,9 @@ mod tests {
     use tempfile::NamedTempFile;
 
 
+    //  Todo:  Test case for malfomred string
+    //  Todo:  Allow passing a file instead
+    
     #[test]
     fn test_rnapkin() {
         let BUBBLE_RADIUS: f64 = 0.5;
