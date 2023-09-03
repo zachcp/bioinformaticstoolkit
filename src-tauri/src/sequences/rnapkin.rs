@@ -1,9 +1,9 @@
+use std::path::PathBuf;
+
 use rnapkin;
 use rnapkin::draw::{self, colors::ColorTheme, Mirror};
 use rnapkin::forest;
 use rnapkin::rnamanip::{self, Nucleotide};
-use rnapkin::utils::ParsedInput;
-use std::path::PathBuf;
 
 #[tauri::command(rename_all = "snake_case")]
 pub fn rnapkin_fn(
