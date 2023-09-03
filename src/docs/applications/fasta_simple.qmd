@@ -2,10 +2,7 @@
 title: "Simple Fasta"
 ---
 
-
-
-# Basic stats
-
+Simplest example. uses Noodles to loop throught a fasta file and return the record count and maximul length in the file
 
 ```{ojs}
 //| echo: false

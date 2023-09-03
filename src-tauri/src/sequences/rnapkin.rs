@@ -24,6 +24,7 @@ pub fn rnapkin_fn(
         _ => ColorTheme::default(),
     };
 
+    
     let mut lines = sequence.split("\n").map(|x| x.to_string());
 
     // https://github.com/ukmrs/rnapkin/blob/main/src/main.rs#L61
@@ -31,6 +32,7 @@ pub fn rnapkin_fn(
     // let height = 900;
     // let BUBBLE_RADIUS: f64 = 0.5;
     // let mut theme = ColorTheme::dark();
+    // Todo: handle malformed parser inputs here
     let pi = rnapkin::utils::ParsedInput::parse(&mut lines).unwrap();
     let filename = PathBuf::from("o.x");
 
@@ -91,6 +93,7 @@ mod tests {
 
     #[test]
     fn test_rnapkin() {
+
         let BUBBLE_RADIUS: f64 = 0.5;
 
         let tree1 = ">fantastic guanine riboswitch
@@ -104,12 +107,10 @@ mod tests {
         let mut lines = tree1.split("\n").map(|x| x.to_string());
 
         // https://github.com/ukmrs/rnapkin/blob/main/src/main.rs#L61
-        // pi
         let pi = rnapkin::utils::ParsedInput::parse(&mut lines).unwrap();
         let height = 900;
 
         let filename = PathBuf::from("o.x");
-        let mut theme = ColorTheme::dark();
 
         println!("{:?}", pi);
         let (pairlist, sequence) = match (pi.secondary_structure, pi.sequence) {

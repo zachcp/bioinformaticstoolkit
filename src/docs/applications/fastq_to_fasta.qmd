@@ -1,11 +1,9 @@
-
 ---
 title: "Fastq to fasta conversion"
 ---
 
+This function will take a fasq file and convert it to a fasta file.
 
-
-# Convert Fastq to Fasta
 
 ```{ojs}
 //| echo: false

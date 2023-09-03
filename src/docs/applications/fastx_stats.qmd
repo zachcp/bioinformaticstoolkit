@@ -4,8 +4,6 @@ title: "Fastx stats"
 
 
 
-# FastX Basic stats
-
 
 ```{ojs}
 //| echo: false
@@ -50,7 +48,37 @@ viewof fasta_stats_seqkit = Inputs.button(
     });
 
 
-fasta_stats_seqkit_realized = (fasta_stats_seqkit == null) ? "Click Above to Get Fasta Statistics" : fasta_stats_seqkit
+fasta_stats_seqkit_realized = (fasta_stats_seqkit == null)  ? "Click Above to Get Fasta Statistics" : fasta_stats_seqkit
 fasta_stats_seqkit_realized
+
+```
+
+
+
+
+## Basic Stats
+
+```{ojs}
+//| echo: false
+
+html`AVG Len: ${fasta_stats_seqkit_realized.avg_len}`
+html`Filename: ${fasta_stats_seqkit_realized.filename}`
+html`Format: ${fasta_stats_seqkit_realized.format}`
+html`MAX Len: ${fasta_stats_seqkit_realized.max_len}`
+html`MIN Len: ${fasta_stats_seqkit_realized.min_len}`
+html`Number of Records Len: ${fasta_stats_seqkit_realized.num_seqs}`
+html`Sum Len: ${fasta_stats_seqkit_realized.sum_len}`
+
+```
+
+## Plot Histogram 
+
+```{ojs}
+
+Plot.rectY(
+            {length: 10000}, 
+            Plot.binX(
+                {y: "count"}, 
+                {x: fasta_stats_seqkit_realized.contig_lengths})).plot()
 
 ```

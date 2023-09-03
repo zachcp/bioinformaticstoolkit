@@ -49,6 +49,7 @@ website:
               - docs/applications/restriction_enzyme_analysis.qmd
               - docs/applications/rna_rnapkin_viz.qmd
               - docs/applications/js_self_contained.qmd
+              - docs/applications/translation.qmd
 
 
 format:

@@ -79,6 +79,7 @@ pub struct SeqKitFastaData {
     min_len: i32,
     avg_len: f32,
     max_len: i32,
+    contig_lengths: Vec<i32>,
 }
 
 #[tauri::command]
@@ -117,6 +118,7 @@ pub fn get_seqstats(filename: String) -> SeqKitFastaData {
         avg_len: avg,
         min_len: min_value,
         max_len: max_value,
+        contig_lengths: lengths
     };
 
     stats
