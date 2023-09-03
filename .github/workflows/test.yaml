@@ -6,8 +6,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        platform: [macos-latest]
-        # platform: [macos-latest, ubuntu-20.04, windows-latest]
+        platform: [macos-latest, ubuntu-20.04, windows-latest]
 
     runs-on: ${{ matrix.platform }}
     steps:
@@ -27,21 +26,11 @@ jobs:
           sudo dpkg -i quarto-1.3.450-linux-amd64.deb
       - name: install dependencies (macos only)
         if: matrix.platform == 'macos-latest'
-        run: |
-          brew install quarto
+        run: brew install quarto
       - name: install dependencies (windows only)
         if: matrix.platform == 'windows-latest'
-        run: |
-          brew install quarto
+        run: choco install quarto
           
       - uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # - name: Upload macOS installer artifact
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: macOS Installer (${{ matrix.os }})
-      #     path: "./out/macos-universal/crc-macos-installer.pkg"
-      # - name: Install crc pkg
-      #   run: sudo installer -pkg out/macos-universal/crc-macos-installer.pkg -target /
