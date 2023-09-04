@@ -25,7 +25,7 @@ description: |
 - Package your functions and expose outputs to the frontend with [Tauri](https://tauri.app/)
 - Take advantage of fast, battle-tested bioinformatics libraries like [Noodles](https://github.com/zaeleus/noodles) and [rust-bio](https://github.com/rust-bio/rust-bio) or exciting new-comers like [exon](https://github.com/wheretrue/exon) for integration into to wider Rust data ecosystem.
 - Use the power of the Rust [ecosystem of libraries](https://crates.io/) to [explore](https://lib.rs/) and harness high performance libraries.
-- Use Rust/Tauri to build a cross-functional, installable binary of <10Mb.
+- Use Rust/Tauri to build a cross-functional, installable binary of < 10Mb.
 
 
 
