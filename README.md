@@ -5,8 +5,27 @@ RUST-backed utilities for bioinformatic data processing.
 
 ## Get started
 
+The fastest way to get started it to download the applications found in the [Release]()https://github.com/zachcp/bioinformaticstoolkit/releases section. This project aims to demonstrate how the Rust toolchain enables efficient cross-platform support for high-performance applications. By using [Tauri](https://tauri.app/) you can write the entire frontend in  any tool that compiles to HMLT+Javascript, in this case I used [Quarto](https://quarto.org/) to take advantage of its simple composition (its mostly markdown +yaml) as well as it's built-in use of the [observable](https://github.com/observablehq/stdlib) runtime.
+
+
+### Screenshots
+
+Below are screenshots of a native application demonstrating the home page, the guide page, an example RNA secondary strucutre visualization using [rnapkin](https://github.com/ukmrs/rnapkin);statistics of a fasta file including a histrogram of sequence lengths using [noodles](https://docs.rs/noodles-fasta/latest/noodles_fasta/) for IO; and DNA translation using the [protein_translation](https://docs.rs/protein-translate/latest/protein_translate/) crate.
+
+
+![](images/intro.png)
+![](images/guide.png)
+![](images/rna.png)
+![](images/fasta_histogram)
+![](images/translation.png)
+
+
+## Develop
+
 ```sh
 # assuming quarto and cargo are installed and on your path.
+git clone https://github.com/zachcp/bioinformaticstoolkit.git
+cd bioinformaticstoolkit
 
 # install the tauri cli
 cargo install tauri-cli
@@ -28,7 +47,7 @@ cd src-tauri && cargo test -- --nocapture
 ```
 
 
-## Ideas
+## Other Ideas/Tools for Rust Incorporation
 
 
 FASTX:
@@ -54,39 +73,37 @@ DNA Analysis:
       - [ ] Data: Standard RE enzymes
       - [ ] Plot: Genome View of RE sites.
       - [ ] Global view of Palettes and coding types
-  - Insilico PCR: https://github.com/dlesl/pcr
+  - [ ] Insilico PCR: https://github.com/dlesl/pcr
     - Clonifier: https://github.com/dlesl/clonifier
-
   - Phenogram
   - Pangenome TK: https://github.com/GeneDx/pgr-tk (cdep in the build)
   - RE digest and assembly calculations
 
 
-
 VCF:
-    - convert
-    - concat
-    - split
+  - [ ] convert
+  - [ ] concat
+  - [ ] split
 
 RNA Secondary Structure:
   - [x] RNApkin https://lib.rs/crates/rnapkin
 
 
 rna-seq:
-    - gencounts https://github.com/NKI-GCF/gensum
-    - rust-lapper https://crates.io/crates/rust-lapper
+    - [ ] gencounts https://github.com/NKI-GCF/gensum
+    - [ ] rust-lapper https://crates.io/crates/rust-lapper
 
 
 Taxonomy:
-    - load and display a tree file
-    - load and display kraken
-    - load and display bracken
+  - [ ] load and display a tree file
+  - [ ] load and display kraken
+  - [ ] load and display bracken
 
 Peptides and Proteomics: 
   - [unipept](https://crates.io/crates/umgap)
 
 
-Software: 
+Rust Software: 
 
 - [Pangenomer](https://github.com/marschall-lab/panacus)
 - [rust-bio](https://github.com/rust-bio/rust-bio)
@@ -103,7 +120,7 @@ Miscelleaneous:
   - [GFAESTUS](https://github.com/chfi/gfaestus) (c++ dep )
   - [BioSeq](https://github.com/jeff-k/bio-seq)
   - [10x Genomics Rust](https://github.com/10XGenomics/rust-toolbox)
-  - [fq pareser](https://crates.io/crates/fastq)
+  - [fq parser](https://crates.io/crates/fastq)
   - [fastats](https://crates.io/crates/fakit)
   - [fqmerge](https://crates.io/crates/fqkit)
   - [ggcat](https://github.com/algbio/ggcat)
@@ -111,22 +128,20 @@ Miscelleaneous:
   - [liftover with crusmapr](liftover)
   - [exon](https://docs.rs/exon/latest/exon)
   - [phylogeny](https://docs.rs/phylogeny/latest/phylogeny/) # not much action
-
   - [chemical Reaction networks](https://lib.rs/crates/rebop)
   - [gb-io](https://lib.rs/crates/gb-io)
   - [charming - a nive gui library](https://github.com/yuankunzhang/charming)
   - [met map](https://lib.rs/crates/shu)
-
- - [barcode counter](https://lib.rs/crates/barcode-count)
- - [hpo](https://lib.rs/crates/hpo)
- - nanopore read assessment: https://lib.rs/crates/nanoq#readme-read-report
- - [niffler](https://github.com/luizirber/niffler/)
- - [OBO Validatio](https://lib.rs/crates/fastobo-validator)
- - [rustyms](https://lib.rs/crates/rustyms)
- - [preotienogenic](https://lib.rs/crates/proteinogenic)
- - [rdkit](https://lib.rs/crates/rdk)
- - [bigwig2bam](https://lib.rs/crates/bigwig2bam)
- - Plasmapr: https://github.com/BradyAJohnston/plasmapR
- - [flate2](https://docs.rs/flate2/latest/flate2/)use flate2::read::MultiGzDecoder;
- - [bio_streams](https://github.com/jeff-k/bio-streams) 
+  - [barcode counter](https://lib.rs/crates/barcode-count)
+  - [hpo](https://lib.rs/crates/hpo)
+  - nanopore read assessment: https://lib.rs/crates/nanoq#readme-read-report
+  - [niffler](https://github.com/luizirber/niffler/)
+  - [OBO Validatio](https://lib.rs/crates/fastobo-validator)
+  - [rustyms](https://lib.rs/crates/rustyms)
+  - [preotienogenic](https://lib.rs/crates/proteinogenic)
+  - [rdkit](https://lib.rs/crates/rdk)
+  - [bigwig2bam](https://lib.rs/crates/bigwig2bam)
+  - Plasmapr: https://github.com/BradyAJohnston/plasmapR
+  - [flate2](https://docs.rs/flate2/latest/flate2/)use flate2::read::MultiGzDecoder;
+  - [bio_streams](https://github.com/jeff-k/bio-streams) 
   - Streaming iterators for bioinformatics data 
