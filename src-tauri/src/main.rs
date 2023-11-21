@@ -3,6 +3,6 @@
 
 
 fn main() {
-    app_lib::run();
+    bioinformaticstoolkit_lib::run();
   }
 
