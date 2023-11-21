@@ -9,7 +9,8 @@ This function will take a fasq file and convert it to a fasta file.
 //| echo: false
 //| 
 // support functions
-invoke = window.__TAURI__.tauri.invoke;
+primitives = import('https://unpkg.com/@tauri-apps/api@2.0.0-alpha.12/primitives.js?module')
+invoke = primitives.invoke;
 open   = window.__TAURI__.dialog.open;
 ```
 
@@ -33,9 +34,10 @@ viewof convert_stats = Inputs.button(
         value: null, 
         reduce: () => choosefastq()
             .then( function (fqname) {
-                let fasta_name = fqname.split(".").slice(0,-1).join(".");
+                // console.log(fqname);
+                let fasta_name = fqname.path.split(".").slice(0,-1).join(".");
                 fasta_name = fasta_name + "_converted.fasta"
-                return invoke("convert_fastq_to_fasta_tauri", {input_path: fqname, output_path: fasta_name})})});
+                return invoke("convert_fastq_to_fasta_tauri", {input_path: fqname.path, output_path: fasta_name})})});
 
 
 convert_stats_realized = (convert_stats == null) ? "Click Above to Convert" : convert_stats

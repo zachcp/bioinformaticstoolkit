@@ -10,8 +10,8 @@ title: "RNA Secondary Structure Viz"
 //| echo: false
 //| 
 // support functions
-invoke = window.__TAURI__.tauri.invoke;
-open   = window.__TAURI__.dialog.open;
+primitives = import('https://unpkg.com/@tauri-apps/api@2.0.0-alpha.12/primitives.js?module')
+invoke = primitives.invoke;
 ```
 
 Utility that uses [rnapkin](https://github.com/ukmrs/rnapkin),  a rust library that shows RNA secondary structure. Try:
