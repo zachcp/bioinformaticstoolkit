@@ -9,7 +9,8 @@ title: "Fastx stats"
 //| echo: false
 //| 
 // support functions
-invoke = window.__TAURI__.tauri.invoke;
+primitives = import('https://unpkg.com/@tauri-apps/api@2.0.0-alpha.12/primitives.js?module')
+invoke = primitives.invoke;
 open   = window.__TAURI__.dialog.open;
 
 
@@ -44,7 +45,7 @@ viewof fasta_stats_seqkit = Inputs.button(
     "Get Fasta Stats", 
     { 
         value: null, 
-        reduce: () => choosefasta().then((fname) => invoke("get_seqstats", {filename: fname})) 
+        reduce: () => choosefasta().then((fname) => invoke("get_seqstats", {filename: fname.path})) 
     });
 
 

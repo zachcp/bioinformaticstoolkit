@@ -9,7 +9,8 @@ Simple DNA->Protiein Translation using the [protein_translate](https://docs.rs/p
 ```{ojs}
 //| echo: false
 //| 
-invoke = window.__TAURI__.tauri.invoke;
+primitives = import('https://unpkg.com/@tauri-apps/api@2.0.0-alpha.12/primitives.js?module')
+invoke = primitives.invoke;
 ```
 
 

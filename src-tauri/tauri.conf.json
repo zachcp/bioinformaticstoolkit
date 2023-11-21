@@ -1,43 +1,32 @@
 {
   "build": {
-    "beforeDevCommand": "quarto preview src --port 4455 --no-browser",
     "beforeBuildCommand": "quarto render src",
+    "beforeDevCommand": "quarto preview src --port 4455 --no-browser",
     "devPath": "http://localhost:4455",
     "distDir": "../src/_site",
     "withGlobalTauri": true
   },
   "package": {
     "productName": "bioinformaticstoolkit",
-    "version": "0.0.1"
+    "version": "0.0.2"
+  },
+  "plugins": {
+    "shell": {
+      "open": true
+    }
   },
   "tauri": {
-
-    "allowlist": {
-      "all": false,
-      "shell": {
-        "all": false,
-        "open": true
-      },
-      "dialog": {
-        "all": true,
-        "ask": true,
-        "confirm": true,
-        "message": true,
-        "open": true,
-        "save": true
-      }
-    },
     "bundle": {
       "active": true,
-      "targets": "all",
-      "identifier": "com.bioinformaticstoolkit.dev",
       "icon": [
         "icons/32x32.png",
         "icons/128x128.png",
         "icons/128x128@2x.png",
         "icons/icon.icns",
         "icons/icon.ico"
-      ]
+      ],
+      "identifier": "com.bioinformaticstoolkit.dev",
+      "targets": "all"
     },
     "security": {
       "csp": null
@@ -45,10 +34,10 @@
     "windows": [
       {
         "fullscreen": false,
+        "height": 1000,
         "resizable": true,
         "title": "The Bioinformatics Toolkit",
-        "width": 1500,
-        "height": 1000
+        "width": 1500
       }
     ]
   }

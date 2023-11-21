@@ -8,7 +8,12 @@ Simplest example. uses Noodles to loop throught a fasta file and return the reco
 //| echo: false
 //| 
 // support functions
-invoke = window.__TAURI__.tauri.invoke;
+
+
+primitives = import('https://unpkg.com/@tauri-apps/api@2.0.0-alpha.12/primitives.js?module')
+invoke = primitives.invoke;
+
+// invoke = window.__TAURI__.tauri.invoke;
 open   = window.__TAURI__.dialog.open;
 
 
@@ -44,7 +49,12 @@ viewof fasta_stats = Inputs.button(
     "Get Fasta Stats", 
     { 
         value: null, 
-        reduce: () => choosefasta().then((fname) => invoke("get_stats", {filename: fname})) 
+        // reduce: () => choosefasta().then((fname) => invoke("get_stats", {"filename": fname })) 
+        reduce: () => choosefasta().then((fname) => {
+            // console.log(fname);
+            // console.log(fname.path);
+            return invoke("get_stats", {"filename": fname.path });
+        }) 
     });
 
 fasta_stats_realized = (fasta_stats == null) ? "Click Above to Get Fasta Statistics" : fasta_stats

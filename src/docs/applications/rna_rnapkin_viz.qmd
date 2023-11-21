@@ -10,8 +10,8 @@ title: "RNA Secondary Structure Viz"
 //| echo: false
 //| 
 // support functions
-invoke = window.__TAURI__.tauri.invoke;
-open   = window.__TAURI__.dialog.open;
+primitives = import('https://unpkg.com/@tauri-apps/api@2.0.0-alpha.12/primitives.js?module')
+invoke = primitives.invoke;
 ```
 
 Utility that uses [rnapkin](https://github.com/ukmrs/rnapkin),  a rust library that shows RNA secondary structure. Try:
@@ -53,8 +53,13 @@ viewof rnapkin_params = Inputs.form({
 })
 
 
+
 viewof rna_text = Inputs.textarea({label: "RNA For Searching", placeholder: "RNA Napkin", submit: true})
-rna_text_realized =  (rna_text == "") ? []: invoke("rnapkin_fn", {sequence: rna_text, height: rnapkin_params.height, color_theme: rnapkin_params.color_theme, mirror_x: rnapkin_params.mirror_x, mirror_y: rnapkin_params.mirror_y, rotation_angle:rnapkin_params.angle, bubble_radius: rnapkin_params.bubble_radius})
+
+rna_text_realized =  (rna_text == "") ? []: invoke("rnapkin_fn", {sequence: rna_text, height: rnapkin_params.height, color_theme: 
+
+
+rnapkin_params.color_theme, mirror_x: rnapkin_params.mirror_x, mirror_y: rnapkin_params.mirror_y, rotation_angle:rnapkin_params.angle, bubble_radius: rnapkin_params.bubble_radius})
 
 svg`${rna_text_realized}`
 
