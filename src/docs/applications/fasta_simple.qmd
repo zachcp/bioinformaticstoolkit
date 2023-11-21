@@ -49,7 +49,12 @@ viewof fasta_stats = Inputs.button(
     "Get Fasta Stats", 
     { 
         value: null, 
-        reduce: () => choosefasta().then((fname) => invoke("get_stats", {"filename": fname })) 
+        // reduce: () => choosefasta().then((fname) => invoke("get_stats", {"filename": fname })) 
+        reduce: () => choosefasta().then((fname) => {
+            console.log(fname);
+            console.log(fname.path);
+            return invoke("get_stats", {"filename": fname.path });
+        }) 
     });
 
 fasta_stats_realized = (fasta_stats == null) ? "Click Above to Get Fasta Statistics" : fasta_stats
