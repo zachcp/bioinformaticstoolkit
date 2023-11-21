@@ -5,11 +5,12 @@ use sequences::patterns::check_restriction_sites;
 use sequences::rnapkin::rnapkin_fn;
 use sequences::dna_utils::translate_dna;
 
-
   
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
+        .plugin(tauri_plugin_window::init())
+        .plugin(tauri_plugin_dialog::init())
         .invoke_handler(tauri::generate_handler![
             get_stats,
             get_seqstats,
