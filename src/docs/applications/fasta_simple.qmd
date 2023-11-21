@@ -51,8 +51,8 @@ viewof fasta_stats = Inputs.button(
         value: null, 
         // reduce: () => choosefasta().then((fname) => invoke("get_stats", {"filename": fname })) 
         reduce: () => choosefasta().then((fname) => {
-            console.log(fname);
-            console.log(fname.path);
+            // console.log(fname);
+            // console.log(fname.path);
             return invoke("get_stats", {"filename": fname.path });
         }) 
     });
