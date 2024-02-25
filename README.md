@@ -103,11 +103,19 @@ Peptides and Proteomics:
   - [unipept](https://crates.io/crates/umgap)
 
 
-Rust Software: 
+Javascript:
+    - [SGTK](https://olga24912.github.io/SGTK/) 
+    - [ribbon](https://github.com/MariaNattestad/ribbon?tab=readme-ov-file)
+    - [jbrowse](https://jbrowse.org/jb2/docs/quickstart_web/
+    - [ideogram](https://eweitz.github.io/ideogram/differential-expression)
+    - [genomegraphviewer]()
 
+Rust Software:
 - [Pangenomer](https://github.com/marschall-lab/panacus)
 - [rust-bio](https://github.com/rust-bio/rust-bio)
 - [rust-bio-tools](https://github.com/rust-bio/rust-bio-tools)
+- [Slyph](https://github.com/bluenote-1577/sylph/wiki/sylph-cookbook)
+- [Alignoth](https://github.com/alignoth/alignoth)
 
 
 Miscelleaneous:

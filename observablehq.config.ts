@@ -25,10 +25,20 @@ export default {
     {
       name: "RNA Utiliies",
       pages: [
-        {name: "Simple", path: "rna/rna_rnapkin_viz"},
+        {name: "RNAnapkin", path: "rna/rna_rnapkin_viz"},
+      ]
+    },
+    {
+      name: "Javascript Utiliies",
+      pages: [
+        {name: "IGVJS", path: "JSApps/igvjs"},
+        // {name: "Gosling", path: "JSApps/gosling"},
+        {name: "graphgenomeviewer", path: "JSApps/genomegraph"},
+        {name: "msaviewer", path: "JSApps/msa-viewer"},
       ]
     },
   ],
+
 
   // Some additional configuration options and their defaults:
   theme: "default", // try "light", "dark", "slate", etc.
