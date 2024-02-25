@@ -3,7 +3,7 @@
   "version": "0.0.2",
   "identifier": "com.tauri.dev",
   "build": {
-    "beforeDevCommand": "bun run dev --port 1420",
+    "beforeDevCommand": "bun run dev --port 1420 --no-open",
     "devUrl": "http://localhost:1420",
     "beforeBuildCommand": "bun run build",
     "frontendDist": "../dist"
