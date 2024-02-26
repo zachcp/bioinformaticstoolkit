@@ -35,6 +35,9 @@ export default {
         // {name: "Gosling", path: "JSApps/gosling"},
         {name: "graphgenomeviewer", path: "JSApps/genomegraph"},
         {name: "msaviewer", path: "JSApps/msa-viewer"},
+        {name: "ribbon", path: "JSApps/ribbon"},
+        {name: "ideogram", path: "JSApps/ideogram"},
+
       ]
     },
   ],
