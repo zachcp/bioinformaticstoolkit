@@ -14,8 +14,6 @@
 ```js
 
 import {ideogram} from "../components/ideogram.js";
-
-
 ideogram()
 
 ```
