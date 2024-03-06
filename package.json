@@ -17,6 +17,7 @@
     "d3-time-format": "^4.1.0",
     "gosling.js": "^0.16.0",
     "higlass": "^1.13.4",
+    "ideogram": "^1.45.1",
     "igv": "2.15.5",
     "pixi": "^0.3.1",
     "react": "^18.2.0",
