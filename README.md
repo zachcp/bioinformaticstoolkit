@@ -152,7 +152,14 @@ Miscelleaneous:
   - Plasmapr: https://github.com/BradyAJohnston/plasmapR
   - [flate2](https://docs.rs/flate2/latest/flate2/)use flate2::read::MultiGzDecoder;
   - [bio_streams](https://github.com/jeff-k/bio-streams) 
+  - [BRICK Webapp](https://brick.ink/)
   - Streaming iterators for bioinformatics data 
+  - [quickdna](https://github.com/SecureDNA/quickdna)
+  - [Conway-Bromage-Lyndon](https://github.com/imartayan/CBL)
+  - https://github.com/weng-lab/logojs-package
+  - [fiber-seq](https://github.com/fiberseq/fibertools-rs)
+  - []()
+
 
 # bioinformatics-toolkit
 
@@ -170,7 +177,7 @@ For more, see <https://observablehq.com/framework/getting-started>.
 
 A typical Framework project looks like this:
 
-```ini
+```sh
 .
 ├─ docs
 │  ├─ components

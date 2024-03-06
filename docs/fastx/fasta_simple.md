@@ -37,12 +37,7 @@ const fasta_stats = view(Inputs.button(
     "Get Fasta Stats", 
     { 
         value: null, 
-        reduce: () => choosefasta().then((fname) => invoke("get_stats", {"filename": fname.path})) 
-        // reduce: () => choosefasta().then((fname) => {
-        //     console.log(fname);
-        //     console.log(fname.path);
-        //     return invoke("get_stats", {"filename": fname.path });
-        // }) 
+        reduce: () => choosefasta().then((fname) => invoke("get_stats", {"filename": fname.path}))
     }));
 
 let fasta_stats_realized = (fasta_stats == null) ? "Click Above to Get Fasta Statistics" : fasta_stats
