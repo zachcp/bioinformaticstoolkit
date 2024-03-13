@@ -16,26 +16,32 @@ jobs:
     runs-on: ${{ matrix.platform }}
     steps:
       - uses: actions/checkout@v3
-      - name: setup node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
+
       - name: install Rust stable
         uses: dtolnay/rust-toolchain@stable
+
+      - name: setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
 
       - name: install dependencies (ubuntu only)
         if: matrix.platform == 'ubuntu-22.04'
         run: |
-          sudo apt-get update
-          sudo apt install -y wget libwebkit2gtk-4.1-dev build-essential curl wget file libssl-dev libayatana-appindicator3-dev librsvg2-dev
-          wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.3.450/quarto-1.3.450-linux-amd64.deb
-          sudo dpkg -i quarto-1.3.450-linux-amd64.deb
+          curl -fsSL https://bun.sh/install | bash 
+          bun install
+
       - name: install dependencies (macos only)
         if: matrix.platform == 'macos-latest'
-        run: brew install quarto
+        run: |
+          brew install oven-sh/bun/bun
+          bun install
+
       - name: install dependencies (windows only)
         if: matrix.platform == 'windows-latest'
-        run: choco install quarto
+        run: |
+          powershell -c "irm bun.sh/install.ps1|iex"
+          bun install
 
       - uses: tauri-apps/tauri-action@v0
         env:
