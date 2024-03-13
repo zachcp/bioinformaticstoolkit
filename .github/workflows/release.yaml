@@ -52,4 +52,5 @@ jobs:
           releaseBody: 'Release of the Bioinformaticstoolkit using Github Actions'
           releaseDraft: true
           prerelease: false
+          tauriScript: 'tauri'
 
