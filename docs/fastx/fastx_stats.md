@@ -4,7 +4,6 @@ title: "Fastx stats"
 
 
 
-
 ```js
 let open = window.__TAURI__.dialog.open;
 let invoke = window.__TAURI__.core.invoke;
@@ -79,21 +78,19 @@ Columns:
 ```
 
 
-
 ## Basic Stats
 
 ```js
 
-html`
-AVG Len: ${fasta_stats_seqkit_realized.avg_len}
-Filename: ${fasta_stats_seqkit_realized.filename}
-Format: ${fasta_stats_seqkit_realized.format}
-MAX Len: ${fasta_stats_seqkit_realized.max_len}
-MIN Len: ${fasta_stats_seqkit_realized.min_len}
-Number of Records Len: ${fasta_stats_seqkit_realized.num_seqs}
-Sum Len: ${fasta_stats_seqkit_realized.sum_len}
-`
-
+if (fasta_stats_seqkit_realized !== null) {
+    html`AVG Len: ${fasta_stats_seqkit_realized.avg_len}`
+    html`Filename: ${fasta_stats_seqkit_realized.filename}`
+    html`Format: ${fasta_stats_seqkit_realized.format}`
+    html`MAX Len: ${fasta_stats_seqkit_realized.max_len}`
+    html`MIN Len: ${fasta_stats_seqkit_realized.min_len}`
+    html`Number of Records Len: ${fasta_stats_seqkit_realized.num_seqs}`
+    html`Sum Len: ${fasta_stats_seqkit_realized.sum_len}`    
+}
 
 ```
 
@@ -101,17 +98,19 @@ Sum Len: ${fasta_stats_seqkit_realized.sum_len}
 ## Plot Histogram 
 
 ```js
-display(fasta_stats_seqkit_realized)
+if (fasta_stats_seqkit_realized !== null) {
+    display(fasta_stats_seqkit_realized)
+}
 ```
 
 
 ```js
-
-display(
-Plot.rectY(
-            {length: 10000}, 
+if (fasta_stats_seqkit_realized !== null) {
+    display(
+        Plot.rectY(
+            {length: 10000},
             Plot.binX(
-                {y: "count"}, 
+                {y: "count"},
                 {x: fasta_stats_seqkit_realized.contig_lengths})).plot());
-
+}
 ```
