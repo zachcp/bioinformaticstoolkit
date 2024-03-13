@@ -1,44 +1,37 @@
 {
+  "productName": "bioinformatics-toolkit",
+  "version": "0.0.2",
+  "identifier": "com.tauri.dev",
   "build": {
-    "beforeBuildCommand": "quarto render src",
-    "beforeDevCommand": "quarto preview src --port 4455 --no-browser",
-    "devPath": "http://localhost:4455",
-    "distDir": "../src/_site",
-    "withGlobalTauri": true
+    "beforeDevCommand": "bun run dev --port 1420 --no-open",
+    "devUrl": "http://localhost:1420",
+    "beforeBuildCommand": "bun run build",
+    "frontendDist": "../dist"
   },
-  "package": {
-    "productName": "bioinformaticstoolkit",
-    "version": "0.0.2"
-  },
-  "plugins": {
-    "shell": {
-      "open": true
-    }
-  },
-  "tauri": {
-    "bundle": {
-      "active": true,
-      "icon": [
-        "icons/32x32.png",
-        "icons/128x128.png",
-        "icons/128x128@2x.png",
-        "icons/icon.icns",
-        "icons/icon.ico"
-      ],
-      "identifier": "com.bioinformaticstoolkit.dev",
-      "targets": "all"
-    },
-    "security": {
-      "csp": null
-    },
+  "app": {
+    "withGlobalTauri": true,
     "windows": [
       {
         "fullscreen": false,
-        "height": 1000,
         "resizable": true,
-        "title": "The Bioinformatics Toolkit",
-        "width": 1500
+        "title": "bioinformatics-toolkit",
+        "width": 800,
+        "height": 600
       }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
     ]
   }
 }

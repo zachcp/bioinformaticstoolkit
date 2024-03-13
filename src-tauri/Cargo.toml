@@ -1,15 +1,11 @@
 [package]
-name = "bioinformaticstoolkit"
-version = "0.0.2"
+name = "bioinformatics-toolkit"
+version = "0.0.0"
 description = "A Tauri App for Local Bioinformatic tools"
 authors = ["you"]
-license = ""
-repository = ""
 edition = "2021"
 
-
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 
 [lib]
 name = "bioinformaticstoolkit_lib"
@@ -17,24 +13,23 @@ crate-type = ["staticlib", "cdylib", "rlib"]
 
 
 [build-dependencies]
-tauri-build = { version = "2.0.0-alpha", features = [] }
+tauri-build = { version = "2.0.0-beta", features = [] }
 
 [dependencies]
-tauri = { version = "2.0.0-alpha", features = [] }
-tauri-plugin-window = "2.0.0-alpha"
-tauri-plugin-dialog = "2.0.0-alpha"
+tauri = { version = "2.0.0-beta", features = [] }
+tauri-plugin-shell = "2.0.0-beta"
+tauri-plugin-dialog = "2.0.0-beta"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
-noodles-fasta = "0.28.0"
-bio = "1.4.0"
-noodles-fastq = "0.8.0"
+noodles-fasta = "0.34.0"
+bio = "1.5.0"
+noodles-fastq = "0.10.0"
 filepath = "0.1.2"
 rnapkin = "0.3.9"
 protein-translate = "0.2.0"
 
-
 [dev-dependencies]
-tempfile = "3.8.1"
+tempfile = "3.10.0"
 filesize = "0.2.0"
 
 
@@ -42,4 +37,3 @@ filesize = "0.2.0"
 # this feature is used for production builds or when `devPath` points to the filesystem
 # DO NOT REMOVE!!
 custom-protocol = ["tauri/custom-protocol"]
-

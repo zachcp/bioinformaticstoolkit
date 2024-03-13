@@ -31,7 +31,7 @@ pub fn get_stats(filename: String) -> FastaData {
     for result in reader.records() {
         count = count + 1;
         let record = result.unwrap();
-        println!("{}\t{}", record.name(), record.sequence().len());
+        // println!("{}\t{}", record.name(), record.sequence().len());
         let reclength = record.sequence().len();
 
         if reclength > maxlength {
@@ -97,7 +97,7 @@ pub fn get_seqstats(filename: String) -> SeqKitFastaData {
         count = count + 1;
 
         let record = result.unwrap();
-        println!("{}\t{}", record.name(), record.sequence().len());
+        // println!("{}\t{}", record.name(), record.sequence().len());
 
         let reclength = record.sequence().len();
         lengths.push(reclength as i32);
@@ -141,7 +141,7 @@ pub fn convert_fastq_to_fasta(input_path: &str, output_path: &str) -> io::Result
         let record = result?;
         let recname = String::from_utf8(record.name().to_vec()).unwrap();
         let recdescription = String::from_utf8(record.description().to_vec()).unwrap();
-        let fasta_definition = FastaDefinition::new(recname, Some(recdescription));
+        let fasta_definition = FastaDefinition::new(recname, Some(recdescription.into()));
         let fasta_record = fasta::Record::new(
             fasta_definition,
             fasta::record::Sequence::from(record.sequence().to_vec()),

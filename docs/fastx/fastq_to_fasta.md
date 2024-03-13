@@ -5,18 +5,13 @@ title: "Fastq to fasta conversion"
 This function will take a fasq file and convert it to a fasta file.
 
 
-```{ojs}
-//| echo: false
-//| 
-// support functions
-primitives = import('https://unpkg.com/@tauri-apps/api@2.0.0-alpha.12/primitives.js?module')
-invoke = primitives.invoke;
-open   = window.__TAURI__.dialog.open;
+```js
+let open = window.__TAURI__.dialog.open;
+let invoke = window.__TAURI__.core.invoke;
 ```
 
 
-```{ojs}
-//|  code-fold: true
+```js
 
 async function choosefastq(){
     const selected = open({
@@ -28,7 +23,7 @@ async function choosefastq(){
     return selected
 };
 
-viewof convert_stats = Inputs.button(
+const convert_stats = view(Inputs.button(
     "Convert FastQ to Fasta", 
     { 
         value: null, 
@@ -37,10 +32,13 @@ viewof convert_stats = Inputs.button(
                 // console.log(fqname);
                 let fasta_name = fqname.path.split(".").slice(0,-1).join(".");
                 fasta_name = fasta_name + "_converted.fasta"
-                return invoke("convert_fastq_to_fasta_tauri", {input_path: fqname.path, output_path: fasta_name})})});
+                return invoke("convert_fastq_to_fasta_tauri", {input_path: fqname.path, output_path: fasta_name})})}));
+
+let convert_stats_realized = (convert_stats == null) ? "Click Above to Convert" : convert_stats
+
+```
 
 
-convert_stats_realized = (convert_stats == null) ? "Click Above to Convert" : convert_stats
-convert_stats_realized
-
+```js
+view(convert_stats_realized)
 ```

@@ -6,22 +6,21 @@ Simple DNA->Protiein Translation using the [protein_translate](https://docs.rs/p
 
 
 
-```{ojs}
-//| echo: false
-//| 
-primitives = import('https://unpkg.com/@tauri-apps/api@2.0.0-alpha.12/primitives.js?module')
-invoke = primitives.invoke;
+```js
+let invoke = window.__TAURI__.core.invoke;
+let dna_text = view(Inputs.textarea({label: "DNA For Translation", placeholder: "DNA Here", submit: true}));
+let dna_text_realized;
+
+
+display(dna_text)
 ```
 
-
-
-```{ojs}
-viewof dna_text = Inputs.textarea({label: "DNA For Translation", placeholder: "DNA Here", submit: true})
-
-dna_text_realized =  (dna_text == "") ? []: invoke("translate_dna", {dnainput: dna_text})
-dna_text_realized
+```js
+// if (dna_text != "") {
+//     dna_text_realized =  await invoke("translate_dna", {dnainput: dna_text});
+//     display(dna_text_realized);
+// }
 ```
-
 
 ## Example
 
