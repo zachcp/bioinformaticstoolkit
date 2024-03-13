@@ -39,7 +39,7 @@ jobs:
       - name: install dependencies (windows only)
         if: matrix.platform == 'windows-latest'
         run: |
-          bun install
+          npm install
 
       - uses: tauri-apps/tauri-action@v0
         env:
