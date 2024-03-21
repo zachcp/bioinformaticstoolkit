@@ -25,10 +25,15 @@ jobs:
         with:
           node-version: 20
 
-      - name: install dependencies
+      - name: install dependencies (ubuntu only)
+        if: matrix.platform == 'ubuntu-22.04'
+        run: |
+          sudo apt-get update
+          sudo apt-get install javascriptcoregtk-4.1 libsoup-3.0 webkit2gtk-4.1 -y
+
+      - name: install node
         run: |
           npm install
-          cargo add tauri-cli@=2.0.0-beta.9
 
       - uses: tauri-apps/tauri-action@v0
         env:
@@ -39,5 +44,4 @@ jobs:
           releaseBody: 'Release of the Bioinformaticstoolkit using Github Actions'
           releaseDraft: true
           prerelease: false
-          tauriScript: "cargo tauri"
 
