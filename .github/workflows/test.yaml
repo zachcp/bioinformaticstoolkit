@@ -24,8 +24,8 @@ jobs:
         if: matrix.platform == 'ubuntu-22.04'
         run: |
           curl -fsSL https://bun.sh/install | bash
-          bun install
           source /home/runner/.bashrc
+          bun install
 
       - name: install dependencies (macos only)
         if: matrix.platform == 'macos-latest'
