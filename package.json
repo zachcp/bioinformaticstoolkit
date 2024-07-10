@@ -11,15 +11,15 @@
   },
   "dependencies": {
     "@observablehq/framework": "latest",
-    "@tauri-apps/api": "^2.0.0-beta.6",
+    "@tauri-apps/api": "^2.0.0-beta.13",
     "@tauri-apps/plugin-dialog": "^2.0.0-beta.2",
     "@tauri-apps/plugin-shell": "^2.0.0-beta.2",
     "d3-dsv": "^3.0.1",
     "d3-time-format": "^4.1.0",
-    "gosling.js": "^0.16.0",
+    "gosling.js": "^0.17.0",
     "higlass": "^1.13.4",
     "ideogram": "^1.45.1",
-    "igv": "2.15.5",
+    "igv": "2.15.12",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
