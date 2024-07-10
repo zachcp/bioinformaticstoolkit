@@ -1,4 +1,4 @@
-name: 'test-on-pr'
+name: "test-on-pr"
 on: [pull_request]
 
 jobs:
@@ -23,8 +23,9 @@ jobs:
       - name: install dependencies (ubuntu only)
         if: matrix.platform == 'ubuntu-22.04'
         run: |
-          curl -fsSL https://bun.sh/install | bash 
+          curl -fsSL https://bun.sh/install | bash
           bun install
+          source /home/runner/.bashrc
 
       - name: install dependencies (macos only)
         if: matrix.platform == 'macos-latest'
