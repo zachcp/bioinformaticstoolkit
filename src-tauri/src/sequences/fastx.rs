@@ -118,7 +118,7 @@ pub fn get_seqstats(filename: String) -> SeqKitFastaData {
         avg_len: avg,
         min_len: min_value,
         max_len: max_value,
-        contig_lengths: lengths
+        contig_lengths: lengths,
     };
 
     stats
@@ -206,6 +206,4 @@ mod tests {
         assert!(temp_file.path().exists());
         assert!(temp_file.path().size_on_disk().unwrap() != 0);
     }
-
-
 }
