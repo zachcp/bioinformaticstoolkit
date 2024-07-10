@@ -1,4 +1,4 @@
-name: 'publish'
+name: "publish"
 on:
   push:
     branches:
@@ -15,7 +15,7 @@ jobs:
 
     runs-on: ${{ matrix.platform }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: install Rust stable
         uses: dtolnay/rust-toolchain@stable
@@ -40,8 +40,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tagName: app-v__VERSION__ # the action automatically replaces \_\_VERSION\_\_ with the app version
-          releaseName: 'BioinformaticsToolkit v__VERSION__'
-          releaseBody: 'Release of the Bioinformaticstoolkit using Github Actions'
+          releaseName: "BioinformaticsToolkit v__VERSION__"
+          releaseBody: "Release of the Bioinformaticstoolkit using Github Actions"
           releaseDraft: true
           prerelease: false
-

@@ -21,12 +21,13 @@ tauri-plugin-shell = "2.0.0-beta"
 tauri-plugin-dialog = "2.0.0-beta"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
-noodles-fasta = "0.34.0"
-bio = "1.5.0"
-noodles-fastq = "0.10.0"
+noodles-fasta = "0.40.0"
+bio = "2.0.0"
+noodles-fastq = "0.12.0"
 filepath = "0.1.2"
 rnapkin = "0.3.9"
 protein-translate = "0.2.0"
+exon = "0.26.1"
 
 [dev-dependencies]
 tempfile = "3.10.0"
