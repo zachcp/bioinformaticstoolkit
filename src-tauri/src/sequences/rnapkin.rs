@@ -1,9 +1,8 @@
-use std::path::PathBuf;
-
 use rnapkin;
 use rnapkin::draw::{self, colors::ColorTheme, Mirror};
 use rnapkin::forest;
 use rnapkin::rnamanip::{self, Nucleotide};
+use std::path::PathBuf;
 
 #[tauri::command(rename_all = "snake_case")]
 pub fn rnapkin_fn(
@@ -24,7 +23,6 @@ pub fn rnapkin_fn(
         _ => ColorTheme::default(),
     };
 
-    
     let mut lines = sequence.split("\n").map(|x| x.to_string());
 
     // https://github.com/ukmrs/rnapkin/blob/main/src/main.rs#L61
@@ -85,15 +83,12 @@ pub fn rnapkin_fn(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use filesize::PathExt;
-    use tempfile::NamedTempFile;
 
     //  Todo:  Test case for malfomred string
     //  Todo:  Allow passing a file instead
 
     #[test]
     fn test_rnapkin() {
-
         let BUBBLE_RADIUS: f64 = 0.5;
 
         let tree1 = ">fantastic guanine riboswitch
