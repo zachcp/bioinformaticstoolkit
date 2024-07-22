@@ -1,7 +1,6 @@
 // use std::io::prelude::*;
 use protein_translate::translate;
 
-
 //  DNA Utilities -------------------------------------------------------------------------------------------------------------------
 
 #[tauri::command]
@@ -14,8 +13,5 @@ pub fn translate_dna(dnainput: String) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use filesize::PathExt;
     use tempfile::NamedTempFile;
-
-
 }

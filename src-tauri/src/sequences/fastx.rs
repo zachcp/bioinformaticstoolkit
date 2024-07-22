@@ -1,14 +1,11 @@
 // use std::io::prelude::*;
-use std::io::{self, BufReader, BufWriter};
-
-use std::fs::File;
-use std::str;
-
-use serde::{Deserialize, Serialize};
-
 use fasta::record::Definition as FastaDefinition;
 use noodles_fasta as fasta;
 use noodles_fastq as fastq;
+use serde::{Deserialize, Serialize};
+use std::fs::File;
+use std::io::{self, BufReader, BufWriter};
+use std::str;
 
 //  Get Stats -------------------------------------------------------------------------------------------------------------------
 
@@ -171,7 +168,7 @@ pub fn convert_fastq_to_fasta_tauri(input_path: &str, output_path: &str) -> Resu
 #[cfg(test)]
 mod tests {
     use super::*;
-    use filesize::PathExt;
+    use std::fs;
     use tempfile::NamedTempFile;
 
     #[test]
@@ -193,7 +190,8 @@ mod tests {
 
         assert!(result.is_ok());
         assert!(temp_file.path().exists());
-        assert!(temp_file.path().size_on_disk().unwrap() != 0);
+        let metadata = fs::metadata(temp_file.path()).unwrap();
+        assert!(metadata.len() > 0);
     }
 
     #[test]
@@ -204,6 +202,7 @@ mod tests {
 
         assert!(result.is_ok());
         assert!(temp_file.path().exists());
-        assert!(temp_file.path().size_on_disk().unwrap() != 0);
+        let metadata = fs::metadata(temp_file.path()).unwrap();
+        assert!(metadata.len() > 0);
     }
 }
