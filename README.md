@@ -2,7 +2,7 @@
 
 RUST-backed utilities for bioinformatic data processing. Rust on the backend with JS on the front.
 
-![](src-tauri-icons/Square142x142Logo.png)
+![](src-tauri/icons/Square142x142Logo.png)
 
 
 ## Develop
