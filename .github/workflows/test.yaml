@@ -21,6 +21,6 @@ jobs:
       - name: install dependencies
         run: bun install
 
-      - uses: tauri-apps/tauri-action@v0.5.9
+      - uses: tauri-apps/tauri-action@v0.5.11
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
