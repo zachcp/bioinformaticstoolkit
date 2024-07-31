@@ -2,12 +2,15 @@
 
 RUST-backed utilities for bioinformatic data processing. Rust on the backend with JS on the front.
 
+![](src-tauri-icons/Square142x142Logo.png)
+
 
 ## Develop
 
 ```sh
 # assuming quarto and cargo are installed and on your path.
 git clone https://github.com/zachcp/bioinformaticstoolkit.git
+
 cd bioinformaticstoolkit
 
 # install the tauri cli
