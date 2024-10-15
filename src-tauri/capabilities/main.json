@@ -4,14 +4,13 @@
   "description": "Capability for the main window",
   "windows": ["main"],
   "permissions": [
-    "core:path:default",
-    "core:event:default",
-    "core:window:default",
     "core:app:default",
-    "core:resources:default",
+    "core:event:default",
     "core:menu:default",
+    "core:path:default",
+    "core:resources:default",
     "core:tray:default",
-    "dialog:allow-open",
-    "shell:allow-open"
+    "core:window:default",
+    "dialog:allow-open"
   ]
 }

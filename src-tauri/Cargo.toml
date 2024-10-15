@@ -17,10 +17,8 @@ tauri-build = { version = "2.0.1", features = [] }
 
 [dependencies]
 tauri = { version = "2.0.4", features = [] }
-tauri-plugin-shell = "2.0.1"
 tauri-plugin-dialog = "2.0.1"
 serde = { version = "1.0", features = ["derive"] }
-serde_json = "1.0"
 noodles-fasta = "0.44.0"
 bio = "2.0.3"
 noodles-fastq = "0.15.0"
