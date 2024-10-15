@@ -2,73 +2,9 @@
 title: "Fastx stats"
 ---
 
-
-```js
-import { open } from "@tauri-apps/plugin-dialog";
-import { invoke } from "npm:@tauri-apps/api/core";
-
-
-// use the tauri open to get absolute file paths
-async function choosefasta(){
-    const selected = open({
-        multiple: false,
-        filters: [{
-            name: 'Fasta',
-            extensions: ['fa', 'fasta', 'fna']}]
-    });
-    return selected
-};
-
-async function choosefastq(){
-    const selected = open({
-        multiple: false,
-        filters: [{
-            name: 'Fastq',
-            extensions: ['fq', 'fastq']}]
-    });
-    return selected
-};
-
-```
-
-
-```js
-
-// const fasta_stats_seqkit = view(Inputs.button(
-//    "Get Fasta Stats",
-//    {
-//        value: null,
-//        reduce: () => choosefasta().then((fname) => invoke("get_seqstats", {filename: fname.path}))
-//    }));
-
-const fasta_stats_seqkit = view(Inputs.button(
-    "Get Fasta Stats",
-    {
-        value: null,
-        reduce: () => choosefasta().then((selected) => {
-            if (selected) {
-                console.log("selected!");
-                return invoke("get_seqstats", { filename: selected }).then(result => {
-                                        console.log("Stats received:", result);
-                                        return result; // This will update the button's value
-                                    });
-            } else {
-                return Promise.reject("No file selected");
-            }
-        })
-    }
-));
-
-let fasta_stats_seqkit_realized = (fasta_stats_seqkit == null)  ? "Click Above to Get Fasta Statistics" : fasta_stats_seqkit
-
-```
-
-
 ```txt
-
 https://downloads.pacbcloud.com/public/dataset/Sequel-IIe-202104/metagenomics/?utm_source=Website&utm_medium=webpage&utm_term=SQII-humanGut-microbiome-pooledStandards&utm_content=datasets&utm_campaign=0000-Website-Leads
 https://downloads.pacbcloud.com/public/dataset/AAV/2022-ssAAV-scAAV-mix/1-mapped-mixed/
-
 
 simple statistics of FASTA/Q files
 
@@ -94,40 +30,22 @@ Columns:
 
 ```
 
-
 ## Basic Stats
 
 ```js
+import {stats_description, plot_stats, getFastaStatsSeqkit} from "../components/fasta_processing.js";
 
-if (fasta_stats_seqkit_realized !== null) {
-    html`AVG Len: ${fasta_stats_seqkit_realized.avg_len}`
-    html`Filename: ${fasta_stats_seqkit_realized.filename}`
-    html`Format: ${fasta_stats_seqkit_realized.format}`
-    html`MAX Len: ${fasta_stats_seqkit_realized.max_len}`
-    html`MIN Len: ${fasta_stats_seqkit_realized.min_len}`
-    html`Number of Records Len: ${fasta_stats_seqkit_realized.num_seqs}`
-    html`Sum Len: ${fasta_stats_seqkit_realized.sum_len}`
-}
+const fasta_stats = view(
+Inputs.button("Get Fasta Stats", {
+  value: null,
+  reduce: () => getFastaStatsSeqkit()
+}));
 
 ```
 
-
-## Plot Histogram
-
 ```js
-if (fasta_stats_seqkit_realized !== null) {
-    display(fasta_stats_seqkit_realized)
-}
-```
-
-
-```js
-if (fasta_stats_seqkit_realized !== null) {
-    display(
-        Plot.rectY(
-            {length: 10000},
-            Plot.binX(
-                {y: "count"},
-                {x: fasta_stats_seqkit_realized.contig_lengths})).plot());
+if (fasta_stats != null) {
+  display(stats_description(fasta_stats));
+  display(plot_stats(fasta_stats));
 }
 ```
