@@ -3,7 +3,7 @@ export default {
   // The project’s title; used in the sidebar and webpage titles.
   title: "bioinformatics-toolkit",
   search: true,
-  root: "docs",
+  // root: "src",
   // The pages and sections in the sidebar. If you don’t specify this option,
   // all pages will be listed in alphabetical order. Listing pages explicitly
   // lets you organize them into sections and have unlisted pages.

@@ -16,7 +16,7 @@ pub struct FastaData {
 }
 
 #[tauri::command(rename_all = "snake_case")]
-pub fn get_stats(filename: String) -> FastaData {
+pub fn get_stats(filename: String) -> Result<FastaData, String> {
     let mut count = 0;
     let mut maxlength = 0;
 
@@ -41,7 +41,7 @@ pub fn get_stats(filename: String) -> FastaData {
         maxlength: maxlength as i32,
     };
 
-    stats
+    Ok(stats)
 }
 
 //  Get Advanced Stats  -------------------------------------------------------------------------------------------------------------------

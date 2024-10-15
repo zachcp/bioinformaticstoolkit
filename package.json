@@ -11,22 +11,20 @@
   },
   "dependencies": {
     "@observablehq/framework": "latest",
-    "@tauri-apps/api": "^2.0.0-beta.13",
-    "@tauri-apps/plugin-dialog": "^2.0.0-beta.7",
-    "@tauri-apps/plugin-shell": "^2.0.0-beta.8",
+    "@tauri-apps/api": "latest",
+    "@tauri-apps/plugin-dialog": "^2.0.0",
+    "@tauri-apps/plugin-shell": "^2.0.0",
     "d3-dsv": "^3.0.1",
     "d3-time-format": "^4.1.0",
-    "gosling.js": "^0.17.0",
-    "higlass": "^1.13.4",
-    "ideogram": "^1.45.1",
-    "igv": "2.15.13",
+    "ideogram": "^1.47",
+    "igv": "3.0.8",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@tauri-apps/cli": "^2.0.0-beta.10",
-    "typescript": "^5.5.3",
-    "vite": "^5.3.4"
+    "@tauri-apps/cli": "^2.0.3",
+    "typescript": "latest",
+    "vite": "latest"
   },
   "engines": {
     "node": ">=20.6"

@@ -4,11 +4,14 @@
   "identifier": "com.bioinformatics.toolkit",
   "build": {
     "beforeDevCommand": "observable preview --port 1420 --no-open",
-    "devUrl": "http://localhost:1420",
     "beforeBuildCommand": "npm run build",
+    "devUrl": "http://localhost:1420",
     "frontendDist": "../dist"
   },
   "app": {
+    "security": {
+      "csp": null
+    },
     "withGlobalTauri": true,
     "windows": [
       {
@@ -18,10 +21,7 @@
         "width": 800,
         "height": 600
       }
-    ],
-    "security": {
-      "csp": null
-    }
+    ]
   },
   "bundle": {
     "active": true,
