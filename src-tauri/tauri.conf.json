@@ -12,7 +12,7 @@
     "security": {
       "csp": null
     },
-    "withGlobalTauri": true,
+    "withGlobalTauri": false,
     "windows": [
       {
         "fullscreen": false,

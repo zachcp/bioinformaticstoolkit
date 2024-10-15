@@ -2,7 +2,8 @@
 
 ```js
 import {svg, html} from "npm:htl";
-let invoke = window.__TAURI__.core.invoke;
+import { invoke } from "npm:@tauri-apps/api/core";
+
 
 function unsafe_html() {
   const span = document.createElement("span");
@@ -60,13 +61,12 @@ if (rnapkin_params.rna != "") {
   // retunrs text. I need a propr DOM element
   rna_text_realized = await invoke("rnapkin_fn", {
   sequence: rnapkin_params.rna,
-  height: rnapkin_params.height, 
+  height: rnapkin_params.height,
   color_theme:  rnapkin_params.color_theme,
-   mirror_x: rnapkin_params.mirror_x, 
-   mirror_y: rnapkin_params.mirror_y, 
-   rotation_angle:rnapkin_params.angle, 
-   bubble_radius: rnapkin_params.bubble_radius});    
+   mirror_x: rnapkin_params.mirror_x,
+   mirror_y: rnapkin_params.mirror_y,
+   rotation_angle:rnapkin_params.angle,
+   bubble_radius: rnapkin_params.bubble_radius});
   console.log(rna_text_realized);
   display(unsafe_html`${rna_text_realized}`);
 }
-

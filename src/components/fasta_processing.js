@@ -28,44 +28,12 @@ function choosefastq() {
   return selected;
 }
 
-export function getFastaStats() {
-  try {
-    // File selection
-    const selected = open({
-      multiple: false,
-      filters: [
-        {
-          name: "Fasta",
-          extensions: ["fa", "fasta", "fna"],
-        },
-      ],
-    });
-
-    if (!selected) {
-      return html`<div>No file selected</div>`;
-    }
-
-    console.log("Selected file:", selected);
-
-    // Invoke Rust command
-    const stats = invoke("get_stats", { filename: selected });
-
-    // Render stats
-    return html`
-      <div>
-        <h3>Fasta Statistics</h3>
-        <p>Filename: ${stats.filename}</p>
-        <p>Number of Sequences: ${stats.num_seqs}</p>
-        <p>Total Length: ${stats.total_length}</p>
-        <p>Minimum Length: ${stats.min_length}</p>
-        <p>Maximum Length: ${stats.max_length}</p>
-        <p>Average Length: ${stats.avg_length.toFixed(2)}</p>
-        <p>N50: ${stats.n50}</p>
-        <p>GC Content: ${(stats.gc_content * 100).toFixed(2)}%</p>
-      </div>
-    `;
-  } catch (error) {
-    console.error("Error:", error);
-    return html`<div>Error: ${error.message}</div>`;
-  }
+export async function getFastaStats() {
+  const fasta = await choosefasta();
+  const stats = await invoke("get_stats", { filename: fasta });
+  return html`<div>
+    <h3>Fasta Statistics</h3>
+    <p>Record Count: ${stats.recordcount}</p>
+    <p>Maximum Length: ${stats.maxlength}</p>
+  </div>`;
 }
