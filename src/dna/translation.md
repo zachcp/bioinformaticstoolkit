@@ -8,7 +8,6 @@ Simple DNA->Protiein Translation using the [protein_translate](https://docs.rs/p
 
 ```js
 import { invoke } from "npm:@tauri-apps/api/core";
-let invoke = window.__TAURI__.core.invoke;
 let dna_text = view(Inputs.textarea({label: "DNA For Translation", placeholder: "DNA Here", submit: true}));
 let dna_text_realized;
 

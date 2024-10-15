@@ -7,8 +7,6 @@
 
 ```js
 import { invoke } from "npm:@tauri-apps/api/core";
-
-let invoke = window.__TAURI__.core.invoke;
 let text = view(Inputs.textarea({label: "DNA For Searching", placeholder: "DNA Goes here", submit: true}));
 // let re_sites =  (text == "") ? []: invoke("check_restriction_sites", {sequence: text})
 text
