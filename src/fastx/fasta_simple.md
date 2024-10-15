@@ -52,3 +52,34 @@ let fasta_stats_realized =
 ```js
 display(fasta_stats_realized)
 ```
+
+
+```js
+import {getFastaStats} from "../components/fasta_processing.js";
+```
+
+```js
+const fasta_stats2 = view(
+Inputs.button("Get Fasta Stats: Part 2 ", {
+  value: null,
+  reduce: () => getFastaStats()
+}));
+```
+
+```js
+import {timeline} from "../components/timeline.js";
+```
+
+```js
+let events = [
+  {"name": "Sputnik 1", "year": 1957, "y": 10},
+  {"name": "Apollo 11", "year": 1969, "y": 20},
+  {"name": "Viking 1 and 2", "year": 1975, "y": 30},
+  {"name": "Space Shuttle Columbia", "year": 1981, "y": 40},
+  {"name": "Hubble Space Telescope", "year": 1990, "y": 50},
+  {"name": "ISS Construction", "year": 1998, "y": 60}
+];
+
+display(timeline(events, {height: 300}));
+
+```
