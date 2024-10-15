@@ -6,12 +6,8 @@ This function will take a fasq file and convert it to a fasta file.
 
 
 ```js
-let open = window.__TAURI__.dialog.open;
-let invoke = window.__TAURI__.core.invoke;
-```
-
-
-```js
+import { open } from "@tauri-apps/plugin-dialog";
+import { invoke } from "npm:@tauri-apps/api/core";
 
 async function choosefastq(){
     const selected = open({
@@ -24,9 +20,9 @@ async function choosefastq(){
 };
 
 const convert_stats = view(Inputs.button(
-    "Convert FastQ to Fasta", 
-    { 
-        value: null, 
+    "Convert FastQ to Fasta",
+    {
+        value: null,
         reduce: () => choosefastq()
             .then( function (fqname) {
                 // console.log(fqname);

@@ -4,8 +4,9 @@ title: "Fastx stats"
 
 
 ```js
-let open = window.__TAURI__.dialog.open;
-let invoke = window.__TAURI__.core.invoke;
+import { open } from "@tauri-apps/plugin-dialog";
+import { invoke } from "npm:@tauri-apps/api/core";
+
 
 // use the tauri open to get absolute file paths
 async function choosefasta(){

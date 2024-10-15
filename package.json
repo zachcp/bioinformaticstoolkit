@@ -10,10 +10,10 @@
     "tauri": "tauri"
   },
   "dependencies": {
-    "@observablehq/framework": "latest",
+    "@observablehq/framework": "^1.12.0",
     "@tauri-apps/api": "latest",
-    "@tauri-apps/plugin-dialog": "^2.0.0",
-    "@tauri-apps/plugin-shell": "^2.0.0",
+    "@tauri-apps/plugin-dialog": "latest",
+    "@tauri-apps/plugin-shell": "latest",
     "d3-dsv": "^3.0.1",
     "d3-time-format": "^4.1.0",
     "ideogram": "^1.47",
