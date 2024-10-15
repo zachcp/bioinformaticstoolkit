@@ -14,7 +14,6 @@ export default {
         { name: "Simple", path: "fastx/fasta_simple" },
         { name: "FQ->Fasta", path: "fastx/fastq_to_fasta" },
         { name: "Fastx Stats", path: "fastx/fastx_stats" },
-        { name: "Test", path: "fastx/test" },
       ],
     },
     {
@@ -55,5 +54,4 @@ export default {
   toc: true, // whether to show the table of contents
   // pager: true, // whether to show previous & next links in the footer
   // output: "dist", // path to the output root for build
-  //dynamicPaths: ["./icon.png", "./src/components/timeline.js"],
 };
