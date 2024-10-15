@@ -44,7 +44,7 @@ dist-ssr
 
 .DS_Store
 dist/
-docs/.observablehq/cache/
+src/.observablehq/cache/
 node_modules/
 yarn-error.log
 node_modules

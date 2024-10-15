@@ -3,7 +3,6 @@ title: "Fastx stats"
 ---
 
 
-
 ```js
 let open = window.__TAURI__.dialog.open;
 let invoke = window.__TAURI__.core.invoke;
@@ -34,13 +33,30 @@ async function choosefastq(){
 
 ```js
 
-const fasta_stats_seqkit = view(Inputs.button(
-    "Get Fasta Stats", 
-    { 
-        value: null, 
-        reduce: () => choosefasta().then((fname) => invoke("get_seqstats", {filename: fname.path})) 
-    }));
+// const fasta_stats_seqkit = view(Inputs.button(
+//    "Get Fasta Stats",
+//    {
+//        value: null,
+//        reduce: () => choosefasta().then((fname) => invoke("get_seqstats", {filename: fname.path}))
+//    }));
 
+const fasta_stats_seqkit = view(Inputs.button(
+    "Get Fasta Stats",
+    {
+        value: null,
+        reduce: () => choosefasta().then((selected) => {
+            if (selected) {
+                console.log("selected!");
+                return invoke("get_seqstats", { filename: selected }).then(result => {
+                                        console.log("Stats received:", result);
+                                        return result; // This will update the button's value
+                                    });
+            } else {
+                return Promise.reject("No file selected");
+            }
+        })
+    }
+));
 
 let fasta_stats_seqkit_realized = (fasta_stats_seqkit == null)  ? "Click Above to Get Fasta Statistics" : fasta_stats_seqkit
 
@@ -89,13 +105,13 @@ if (fasta_stats_seqkit_realized !== null) {
     html`MAX Len: ${fasta_stats_seqkit_realized.max_len}`
     html`MIN Len: ${fasta_stats_seqkit_realized.min_len}`
     html`Number of Records Len: ${fasta_stats_seqkit_realized.num_seqs}`
-    html`Sum Len: ${fasta_stats_seqkit_realized.sum_len}`    
+    html`Sum Len: ${fasta_stats_seqkit_realized.sum_len}`
 }
 
 ```
 
 
-## Plot Histogram 
+## Plot Histogram
 
 ```js
 if (fasta_stats_seqkit_realized !== null) {
