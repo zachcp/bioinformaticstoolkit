@@ -1,4 +1,4 @@
-import { open } from "@tauri-apps/plugin-dialog";
+import { open } from "npm:@tauri-apps/plugin-dialog";
 import { invoke } from "npm:@tauri-apps/api/core";
 import { html } from "npm:htl";
 import * as Plot from "npm:@observablehq/plot";

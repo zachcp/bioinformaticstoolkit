@@ -7,7 +7,7 @@
     "dev": "observable preview",
     "deploy": "observable deploy",
     "observable": "observable",
-    "tauri": "tauri"
+    "tauri": "tauri dev"
   },
   "dependencies": {
     "@observablehq/framework": "^1.13.0",
