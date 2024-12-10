@@ -1,6 +1,6 @@
 {
   "productName": "bioinformatics-toolkit",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "identifier": "com.bioinformatics.toolkit",
   "build": {
     "beforeDevCommand": "observable preview --port 1420 --no-open",
