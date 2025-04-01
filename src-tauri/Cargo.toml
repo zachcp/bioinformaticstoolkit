@@ -13,20 +13,20 @@ crate-type = ["staticlib", "cdylib", "rlib"]
 
 
 [build-dependencies]
-tauri-build = { version = "2.0.3", features = [] }
+tauri-build = { version = "2.1.1", features = [] }
 
 [dependencies]
-tauri = { version = "2.1.1", features = [] }
+tauri = { version = "2.4.1", features = [] }
 tauri-plugin-dialog = "2.2.0"
 serde = { version = "1.0", features = ["derive"] }
-noodles-fasta = "0.45.0"
-bio = "2.0.3"
-noodles-fastq = "0.16.0"
+noodles-fasta = "0.50.0"
+bio = "2.2.0"
+noodles-fastq = "0.18.0"
 rnapkin = "0.3.9"
 protein-translate = "0.2.0"
 
 [dev-dependencies]
-tempfile = "3.14.0"
+tempfile = "3.19.1"
 
 
 [features]
